@@ -1,0 +1,1108 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TrainInfo</name>
+    </assembly>
+    <members>
+        <member name="T:TrainInfo.Models.ArrivalTypes">
+            <summary>
+            列車の駅に対する関係を表します。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.ArrivalTypes.Arrivals">
+            <summary>
+            到着。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.ArrivalTypes.Departures">
+            <summary>
+            出発。
+            </summary>
+        </member>
+        <member name="T:TrainInfo.Models.JrhDestType">
+            <summary>
+            行先の方面を表します
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Sapporo_Hakodate">
+            <summary>
+            函館本線札幌方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Sapporo_Chitose">
+            <summary>
+            千歳線札幌方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Sapporo_Sassyo">
+            <summary>
+            学園都市線札幌方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Hakodate_Otaru">
+            <summary>
+            函館本線小樽方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Hakodate_Iwamizawa">
+            <summary>
+            函館本線岩見沢方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Hakodate_Yoichi">
+            <summary>
+            函館本線余市方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Hakodate_Takikawa">
+            <summary>
+            函館本線滝川方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Chitose_Chitose">
+            <summary>
+            千歳線千歳方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Chitose_AP">
+            <summary>
+            千歳線新千歳空港行
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Chitose_Rapid_AP">
+            <summary>
+            千歳線新千歳空港行快速列車
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Chitose_LocalRapid_Sapporo">
+            <summary>
+            千歳線札幌方面普通・快速列車
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Chitose_LimExp_Sapporo">
+            <summary>
+            千歳線札幌方面特急列車
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.chitose_Tomakomai">
+            <summary>
+            千歳線苫小牧方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Chitose_Muroran">
+            <summary>
+            千歳線室蘭方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Sassyo_IshikariTobetsu">
+            <summary>
+            札沼線石狩当別方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Sassyo_Urausu">
+            <summary>
+            札沼線浦臼方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Muroran_Oiwake">
+            <summary>
+            室蘭線追分方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Muroran_Tomakomai">
+            <summary>
+            室蘭線苫小牧方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Muroran_Iwamizawa">
+            <summary>
+            室蘭線岩見沢方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Sekisyo_Oiwake_Obihiro">
+            <summary>
+            石勝線追分・帯広方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Sekisyo_Oiwake_Sapporo">
+            <summary>
+            石勝線追分・札幌方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Sekisyo_MinamiChitose_Sapporo">
+            <summary>
+            石勝線南千歳・札幌方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Sekisyo_Shiyubari">
+            <summary>
+            石勝線新夕張方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Sekisyo_Yubari">
+            <summary>
+            石勝線夕張方面
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhDestType.Sekisyo_Obihiro">
+            <summary>
+            石勝線帯広方面
+            </summary>
+        </member>
+        <member name="T:TrainInfo.Models.JrhLine">
+            <summary>
+            JR北海道の路線を表します。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhLine.Hakodate_Iwamizawa">
+            <summary>
+            函館線　札幌-岩見沢間。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhLine.Hakodate_Otaru">
+            <summary>
+            函館線　札幌-小樽間。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhLine.Chitose_Tomakomai">
+            <summary>
+            千歳線　札幌-苫小牧間。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhLine.Sassyo">
+            <summary>
+            札沼線。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhLine.Sekisyo">
+            <summary>
+            石勝線。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhLine.Sekisyo_Nobiri">
+            <summary>
+            石勝線 上り
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhLine.Sekisyo_Kudari">
+            <summary>
+            石勝線 下り
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhLine.Muroran">
+            <summary>
+            室蘭線。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhLine.Nemuro">
+            <summary>
+            根室本線。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhLine.Hanasaki">
+            <summary>
+            花咲線。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhLine.Senmo">
+            <summary>
+            釧網本線。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhLine.Sekihoku">
+            <summary>
+            石北本線。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.JrhLine.Hurano">
+            <summary>
+            富良野線。
+            </summary>
+        </member>
+        <member name="T:TrainInfo.Models.TrainConditions">
+            <summary>
+            列車運行ステータスを表します。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.TrainConditions.OutsideArea">
+            <summary>
+            提供範囲外。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.TrainConditions.NotDeparted">
+            <summary>
+            出発前。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.TrainConditions.NotDepartedArrive">
+            <summary>
+            出発前の到着列車。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.TrainConditions.OnSchedule">
+            <summary>
+            通常運行。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.TrainConditions.Delayed">
+            <summary>
+            列車遅延。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.TrainConditions.PartiallySuspended">
+            <summary>
+            部分運休。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.TrainConditions.Suspended">
+            <summary>
+            運休。
+            </summary>
+        </member>
+        <member name="T:TrainInfo.Models.TrainTypes">
+            <summary>
+            列車種別を表します。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.TrainTypes.Local">
+            <summary>
+            普通。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.TrainTypes.Semi_Rapid">
+            <summary>
+            区間快速。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.TrainTypes.Rapid">
+            <summary>
+            快速。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.TrainTypes.Express">
+            <summary>
+            急行。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.TrainTypes.Ltd_Exp">
+            <summary>
+            特急。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.TrainTypes.Extra">
+            <summary>
+            臨時。
+            </summary>
+        </member>
+        <member name="F:TrainInfo.Models.TrainTypes.Other">
+            <summary>
+            その他。
+            </summary>
+        </member>
+        <member name="T:TrainInfo.Models.LineRange">
+            <summary>
+            線路上の区間を表します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Models.LineRange.StartPos">
+            <summary>
+            区間の開始駅を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Models.LineRange.EndPos">
+            <summary>
+            区間の終了駅を取得または設定します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.Models.LineRange.#ctor(TrainInfo.Stations.Station,TrainInfo.Stations.Station)">
+            <summary>
+            <see cref="T:TrainInfo.Models.LineRange"/> クラスの新しいインスタンスを開始地点と終了地点で初期化します。
+            </summary>
+            <param name="startPos">区間の開始駅。</param>
+            <param name="endPos">区間の終了駅。</param>
+        </member>
+        <member name="M:TrainInfo.Models.LineRange.#ctor(System.String,System.String)">
+            <summary>
+            <see cref="T:TrainInfo.Models.LineRange"/> クラスの新しいインスタンスを開始地点と終了地点の駅名で初期化します。
+            </summary>
+            <param name="startPos">開始地点の駅名。</param>
+            <param name="endPos">終了地点の駅名。</param>
+        </member>
+        <member name="M:TrainInfo.Models.LineRange.op_Equality(TrainInfo.Models.LineRange,TrainInfo.Models.LineRange)">
+            <summary>
+            2つの区間が等しい区間を示すかどうかを判断します。
+            </summary>
+            <param name="a">比較元の区間。</param>
+            <param name="b">比較対象の区間。</param>
+            <returns>2つの区間が等しいかどうかを示す値。</returns>
+        </member>
+        <member name="M:TrainInfo.Models.LineRange.op_Inequality(TrainInfo.Models.LineRange,TrainInfo.Models.LineRange)">
+            <summary>
+            2つの区間が異なる区間を示すかどうかを判断します。
+            </summary>
+            <param name="a">比較元の区間。</param>
+            <param name="b">比較対象の区間。</param>
+            <returns>2つの区間が異なるかどうかを示す値。</returns>
+        </member>
+        <member name="M:TrainInfo.Models.LineRange.GetNowPosition(TrainInfo.Models.JrhLine)">
+            <summary>
+            現在の列車の位置を表す実数を取得します。
+            </summary>
+            <param name="lineDestPair">位置を取得する対象となる路線</param>
+            <returns>札幌を起点(1)とする位置情報。指定路線上にない場合は<c>null</c>。</returns>
+        </member>
+        <member name="P:TrainInfo.Models.LineRange.IsStation">
+            <summary>
+            この区間がある駅を表すかどうかを判定します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.Models.LineRange.ToString">
+            <summary>
+            この区間を表す文字列を取得します。
+            </summary>
+            <returns>この区間を表す文字列。</returns>
+        </member>
+        <member name="M:TrainInfo.Models.LineRange.Equals(System.Object)">
+            <summary>
+            この区間が比較対象と等しい区間を示すかどうかを判断します。
+            </summary>
+            <param name="obj">比較対象の区間</param>
+            <returns>2つの区間が等しいかどうか</returns>
+        </member>
+        <member name="T:TrainInfo.Models.TrainCondition">
+            <summary>
+            列車の運行状況を表します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Models.TrainCondition.Condition">
+            <summary>
+            運行ステータスを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Models.TrainCondition.SuspendRange">
+            <summary>
+            運休している区間を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Models.TrainCondition.DelayTimeMin">
+            <summary>
+            遅延時間の下限を取得または設定します。
+            遅延がない場合<c>null</c>。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Models.TrainCondition.DelayTimeMax">
+            <summary>
+            遅延時間の上限を取得または設定します。。
+            遅延がない場合<c>null</c>。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.Models.TrainCondition.#ctor(TrainInfo.Models.TrainConditions,TrainInfo.Models.LineRange,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            <see cref="T:TrainInfo.Models.TrainCondition"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="condition">列車運行ステータス。</param>
+            <param name="suspendRange">運休区間。</param>
+            <param name="delayTimeMin">遅延時間の下限。</param>
+            <param name="delayTimeMax">遅延時間の上限。</param>
+        </member>
+        <member name="M:TrainInfo.Models.TrainCondition.ToString">
+            <summary>
+            運行状況の概要を表す文字列を取得します。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TrainInfo.Models.TrainName">
+            <summary>
+            列車名に関わる情報を表します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Models.TrainName.TrainType">
+            <summary>
+            列車の種別を取得します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Models.TrainName.Name">
+            <summary>
+            列車名を取得します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Models.TrainName.Number">
+            <summary>
+            列車番号を取得します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Models.TrainName.SubTrainType">
+            <summary>
+            区間により複数の種別を持つ場合のサブ種別を取得します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Models.TrainName.SubTrainTypeRange">
+            <summary>
+            サブ種別が適用される区間を取得します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.Models.TrainName.#ctor(TrainInfo.Models.TrainTypes,System.String,System.Nullable{System.Int32},System.Nullable{TrainInfo.Models.TrainTypes},TrainInfo.Models.LineRange)">
+            <summary>
+            <see cref="T:TrainInfo.Models.TrainName"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="trainType">列車種別。</param>
+            <param name="name">列車名。</param>
+            <param name="number">列車番号。</param>
+            <param name="subTrainType">サブ列車種別。</param>
+            <param name="subTrainTypeRange">サブ列車種別が適用される区間。</param>
+        </member>
+        <member name="M:TrainInfo.Models.TrainName.ToString">
+            <summary>
+            このインスタンスを表す文字列を取得します。
+            </summary>
+            <returns>列車名を表す文字列。</returns>
+        </member>
+        <member name="T:TrainInfo.RawStationTrainData">
+            <summary>
+            未解析の運行情報生データを表します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.RawStationTrainData.StationId">
+            <summary>
+            駅 ID を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.RawStationTrainData.Departures_datetime">
+            <summary>
+            出発情報の取得日時を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.RawStationTrainData.Departures">
+            <summary>
+            出発列車と方面を表す <see cref="T:System.Collections.Generic.Dictionary`2"/> を取得または設定します
+            </summary>
+        </member>
+        <member name="P:TrainInfo.RawStationTrainData.Arrivals_datetime">
+            <summary>
+            到着情報の取得日時を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.RawStationTrainData.Arrivals">
+            <summary>
+            到着列車と方面を表す <see cref="T:System.Collections.Generic.Dictionary`2"/> を取得または設定します
+            </summary>
+        </member>
+        <member name="T:TrainInfo.RawTrainData">
+            <summary>
+            Webから取得された運行情報の列車データを表現します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.RawTrainData.TrainType">
+            <summary>
+            列車種別を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.RawTrainData.TrainName">
+            <summary>
+            列車名及び種別などの注釈を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.RawTrainData.Time">
+            <summary>
+            出発または到着の時刻を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.RawTrainData.Destination">
+            <summary>
+            目的地を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.RawTrainData.Status">
+            <summary>
+            運行状況を表す番号を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.RawTrainData.Addition">
+            <summary>
+            部分運休区間などの追加情報を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.RawTrainData.NowPosition">
+            <summary>
+            現在位置を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.RawTrainData.FinalDestination">
+            <summary>
+            最終目的地を取得または設定します。
+            </summary>
+        </member>
+        <member name="T:TrainInfo.Spliters.LineTypeSpliter">
+            <summary>
+            路線名及び行先の方面の解析を提供します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.Spliters.LineTypeSpliter.GetDestType(System.String,TrainInfo.Models.ArrivalTypes@)">
+            <summary>
+            行先の方面と到着タイプを取得します。
+            </summary>
+            <param name="text">行先の方面を表す文字列。</param>
+            <param name="arrivalType">到着タイプ。このパラメータは初期化せずに渡されます。</param>
+            <example>函館本線[小樽方面へ]</example>
+            <returns></returns>
+        </member>
+        <member name="M:TrainInfo.Spliters.LineTypeSpliter.GetDestType(System.String)">
+            <summary>
+            行先の方面を取得します。
+            </summary>
+            <param name="text">行先の方面を表す文字列。</param>
+            <example>函館本線[小樽方面へ]</example>
+            <returns></returns>
+        </member>
+        <member name="M:TrainInfo.Spliters.LineTypeSpliter.GetJrhDistType(System.String,System.String)">
+            <summary>
+            行先の方面を表す文字列から <see cref="T:TrainInfo.Models.JrhDestType"/> を返します。
+            </summary>
+            <param name="destTypeString">行先の方面。</param>
+            <returns></returns>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainConditionSpliter.SetCondition(System.String,System.String,System.String)">
+            <summary>
+            列車運行状況を設定します。
+            </summary>
+            <param name="condition">運行状況を表す文字列</param>
+            <param name="suspendRange">運休区間を表す文字列。存在しない場合null</param>
+            <param name="delayText">遅延状況を表す文字列</param>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainConditionSpliter.SetCondition(System.Int32,System.String,System.String)">
+            <summary>
+            列車運行状況を設定します。
+            </summary>
+            <param name="condition">運行状況を表す整数値</param>
+            <param name="suspendRange">運休区間を表す文字列。存在しない場合null</param>
+            <param name="delayText">遅延状況を表す文字列</param>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainConditionSpliter.SuspendRangeSpliter(System.String)">
+            <summary>
+            運休区間を表す文字列から区間情報を返します
+            </summary>
+            <example>"運休(小樽-手稲間)</example>    
+            <param name="text">運休区間を表す文字列</param>
+            <returns>運休区間</returns>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainConditionSpliter.DelayTimeSpliter(System.String)">
+            <summary>
+            遅延時間を表す文字列から遅延時刻の幅の最小値と最大値を返します。幅がない場合両端とも同じ値になります。
+            </summary>
+            <example><c>DelayTimeSpliter("約25～30分遅れ")</c></example>
+            <param name="delayString">遅延時間を表す文字列</param>
+            <returns></returns>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainConditionSpliter.SplitTimeString(System.String)">
+            <summary>
+            日本語の時間表現を分単位の時間に直します
+            </summary>
+            <param name="timeString">時間・分で表現された時刻</param>
+            <returns></returns>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainConditionSpliter.GetTrainCondition(System.String)">
+            <summary>
+            運行状況を表す文字列から運行状況を返します
+            </summary>
+            <param name="condition">運行状況を表す文字列</param>
+            <returns></returns>
+        </member>
+        <member name="T:TrainInfo.Spliters.TrainNameSpliter">
+            <summary>
+            列車名を表す文字列の解析を提供します
+            </summary>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainNameSpliter.SetTrainName(System.String,System.String)">
+            <summary>
+            列車名を表す文字列から列車情報を設定します。
+            </summary>
+            <param name="trainNameString">列車名を表す文字列</param>
+            <param name="trainTypeString">列車種別を表す文字列</param>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainNameSpliter.SplitTrainNumber(System.String,System.Nullable{System.Int32}@)">
+            <summary>
+            号数を含む可能性のある文字列を列車名と号数に分離します
+            </summary>
+            <param name="nameString">列車名</param>
+            <param name="number">号数。号数を含まない場合<c>null</c></param>
+            <returns></returns>
+        </member>
+        <member name="T:TrainInfo.Spliters.TrainPositionSpliter">
+            <summary>
+            列車位置情報の解析を提供します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainPositionSpliter.GetTrainPosition(System.String)">
+            <summary>
+            列車位置を表す文字列から列車が存在する区間の情報を返します。駅上に存在する場合両端とも同じ駅になります。
+            </summary>
+            <param name="positionString">列車位置を表す文字列。</param>
+            <returns></returns>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainPositionSpliter.GetTrainPosition(System.String,System.Char)">
+            <summary>
+            列車位置を表す文字列から列車が存在する区間の情報を返します。駅上に存在する場合両端とも同じ駅になります。
+            </summary>
+            <param name="positionString">列車位置を表す文字列。</param>
+            <param name="delimiter">2つの駅を区切る文字。</param>
+            <returns></returns>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainPositionSpliter.Parse(System.String)">
+            <summary>
+            文字列を路線区間に変換します。
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainPositionSpliter.TryParse(System.String,System.Char,TrainInfo.Models.LineRange@)">
+            <summary>
+            文字列を路線区間に変換します。
+            </summary>
+            <param name="lineRangeString">変換対象の文字列</param>
+            <param name="delimiter">両端の駅を区切る文字</param>
+            <param name="range">変換の結果。変換に失敗した場合は<c>null</c>を返します</param>
+            <returns>変換が成功したかどうか</returns>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainPositionSpliter.TryParse(System.String,TrainInfo.Models.LineRange@)">
+            <summary>
+            文字列を路線区間に変換します。
+            </summary>
+            <param name="lineRangeString">変換対象の文字列</param>
+            <param name="range">変換の結果。変換に失敗した場合は<c>null</c>を返します</param>
+            <returns>変換が成功したかどうか</returns>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainTypeSpliter.GetTrainTypes(System.String)">
+            <summary>
+            列車種別を表す文字列から列車種別を返します
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TrainInfo.Spliters.TrainTypeSpliter.GetTrainTypesFromImgTag(System.String)">
+            <summary>
+            列車種別を表すURLから列車種別を返します
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TrainInfo.Stations.LineDataReader">
+            <summary>
+            路線データの読み込みを提供します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.Stations.LineDataReader.GetStations(TrainInfo.Models.JrhLine)">
+            <summary>
+            路線を指定してその路線にある全ての駅を取得します。
+            </summary>
+            <param name="lineDestPair">取得対象の路線。</param>
+            <returns>該当する駅。札幌が起点です。</returns>
+        </member>
+        <member name="M:TrainInfo.Stations.LineDataReader.GetAllStations">
+            <summary>
+            このクラスに登録されたすべての路線の駅データを取得します。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TrainInfo.Stations.LineDestPair">
+            <summary>
+            路線名と行先の方面の組を表します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Stations.LineDestPair.JrhLine">
+            <summary>
+            路線名を取得します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Stations.LineDestPair.JrhDestType">
+            <summary>
+            行先の方面を取得します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.Stations.LineDestPair.#ctor(TrainInfo.Models.JrhLine,TrainInfo.Models.JrhDestType)">
+            <summary>
+            この構造体の新しいインスタンスを路線名と行先の方面情報から初期化します。
+            </summary>
+            <param name="jrhLine"></param>
+            <param name="jrhDestType"></param>
+        </member>
+        <member name="T:TrainInfo.Stations.Station">
+            <summary>
+            駅を表します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.Stations.Station.#ctor(System.Int32,System.String,System.String,System.String,System.String,System.Nullable{System.Boolean},System.Nullable{TrainInfo.Models.JrhLine},System.Nullable{System.Int32})">
+            <summary>
+            <see cref="T:TrainInfo.Stations.Station"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="stationID"></param>
+            <param name="name"></param>
+            <param name="hiraName"></param>
+            <param name="kataName"></param>
+            <param name="englishName"></param>
+        </member>
+        <member name="P:TrainInfo.Stations.Station.StationID">
+            <summary>
+            情報取得に必要な駅IDを取得します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Stations.Station.Name">
+            <summary>
+            漢字表記の駅名を取得します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Stations.Station.HiraName">
+            <summary>
+            平仮名表記の駅名を取得します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Stations.Station.KataName">
+            <summary>
+            片仮名表記の駅名を取得します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.Stations.Station.EnglishName">
+            <summary>
+            英語表記の駅名を取得します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.Stations.Station.op_Equality(TrainInfo.Stations.Station,TrainInfo.Stations.Station)">
+            <summary>
+            2つの駅が同じ駅を表すかどうか判断します。
+            </summary>
+            <param name="a">比較元の駅。</param>
+            <param name="b">比較対象の駅。</param>
+            <returns></returns>
+        </member>
+        <member name="M:TrainInfo.Stations.Station.op_Inequality(TrainInfo.Stations.Station,TrainInfo.Stations.Station)">
+            <summary>
+            2つの駅が異なる駅を表すかどうか判断します。
+            </summary>
+            <param name="a">比較元の駅。</param>
+            <param name="b">比較対象の駅。</param>
+            <returns></returns>
+        </member>
+        <member name="M:TrainInfo.Stations.Station.ToString">
+            <summary>
+            このインスタンスを表す文字列を取得します。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:TrainInfo.Stations.StationReader.Stations">
+            <summary>
+            サービス提供範囲内のすべての駅を取得します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.Stations.StationReader.#cctor">
+            <summary>
+            <see cref="T:TrainInfo.Stations.StationReader"/> クラスを初期化します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.Stations.StationReader.GetStationById(System.Int32)">
+            <summary>
+            駅IDから駅を検索して返します。
+            </summary>
+            <param name="id">検索対象の駅ID。</param>
+            <returns>該当する駅。存在しない場合は<c>null</c></returns>
+        </member>
+        <member name="M:TrainInfo.Stations.StationReader.GetStationByName(System.String)">
+            <summary>
+            駅名から駅を検索して返します。
+            </summary>
+            <param name="name">検索対象の駅名。</param>
+            <returns>該当する駅。存在しない場合は<c>null</c></returns>
+        </member>
+        <member name="M:TrainInfo.Stations.StationReader.GetStationByKanjiName(System.String)">
+            <summary>
+            漢字駅名から駅を検索して返します。
+            </summary>
+            <param name="name">検索対象の駅名。</param>
+            <returns>該当する駅。存在しない場合は<c>null</c></returns>
+        </member>
+        <member name="M:TrainInfo.Stations.StationReader.GetStationByHiraganaName(System.String)">
+            <summary>
+            平仮名駅名から駅を検索して返します。
+            </summary>
+            <param name="name">検索対象の駅名。</param>
+            <returns>該当する駅。存在しない場合は<c>null</c></returns>
+        </member>
+        <member name="M:TrainInfo.Stations.StationReader.GetStationByKatakanaName(System.String)">
+            <summary>
+            片仮名駅名から駅を検索して返します。
+            </summary>
+            <param name="name">検索対象の駅名。</param>
+            <returns>該当する駅。存在しない場合は<c>null</c></returns>
+        </member>
+        <member name="M:TrainInfo.Stations.StationReader.GetStationByRomanName(System.String)">
+            <summary>
+            ローマ字駅名から駅を検索して返します。
+            </summary>
+            <param name="name">検索対象の駅名。</param>
+            <returns>該当する駅。存在しない場合は<c>null</c></returns>
+        </member>
+        <member name="M:TrainInfo.Stations.StationReader.GetOrCreateStationByName(System.String)">
+            <summary>
+            該当する駅名の駅を探し、存在しなければ仮の駅名データを作成して返します。
+            </summary>
+            <param name="name">駅名。</param>
+            <returns></returns>
+        </member>
+        <member name="T:TrainInfo.Tools">
+            <summary>
+            列車データを処理する拡張メソッドを提供します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.Tools.GetName(TrainInfo.Models.TrainTypes)">
+            <summary>
+            <see cref="T:TrainInfo.Models.TrainTypes"/> の日本語名を取得します。
+            </summary>
+            <param name="trainTypes">取得対象の列車種別。</param>
+            <returns>一般的な日本語の列車種別名。</returns>
+        </member>
+        <member name="M:TrainInfo.Tools.GetName(TrainInfo.Models.TrainConditions)">
+            <summary>
+            <see cref="T:TrainInfo.Models.TrainConditions"/> の日本語名を取得します。
+            </summary>
+            <param name="trainConditions">取得対象の運行状況。</param>
+            <returns>列車状況を表す文字列。</returns>
+        </member>
+        <member name="M:TrainInfo.Tools.GetRange(System.String,System.Char,System.Char)">
+            <summary>
+            2つの指定された文字の間にある文字列を返します。
+            </summary>
+            <param name="text">検索対象の文字列</param>
+            <param name="start">始点となる文字。</param>
+            <param name="end">終点となる文字。</param>
+            <returns>検索結果。存在しない場合は空の文字列を返します。</returns>
+        </member>
+        <member name="M:TrainInfo.Tools.GetRangeWithStart(System.String,System.Char)">
+            <summary>
+            指定された文字から最後までの間にある文字列を返します。
+            </summary>
+            <param name="text">検索対象の文字列</param>
+            <param name="delimiter">区切り文字。</param>
+            <returns>検索結果。存在しない場合は空の文字列を返します。</returns>
+        </member>
+        <member name="M:TrainInfo.Tools.GetRangeWithEnd(System.String,System.Char)">
+            <summary>
+            文字列の最初から指定された文字までの間にある文字列を返します
+            </summary>
+            <param name="text">検索対象の文字列。</param>
+            <param name="delimiter">区切り文字。</param>
+            <returns>検索結果。存在しない場合は空の文字列を返します。</returns>
+        </member>
+        <member name="M:TrainInfo.Tools.ToHankakuNum(System.String)">
+            <summary>
+            文字列内に含まれるすべての全角数字を半角に変換して返します。変換処理は文字コードに依存しています。
+            </summary>
+            <param name="text">検索対象の文字列。</param>
+            <returns>全角数字が半角に変換された文字列。</returns>
+        </member>
+        <member name="T:TrainInfo.TrainData">
+            <summary>
+            列車データを表します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.TrainData.Name">
+            <summary>
+            列車名に関わる情報を取得します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.TrainData.Time">
+            <summary>
+            列車の出発または到着の時刻を取得します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.TrainData.Destination">
+            <summary>
+            列車の行先を取得します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.TrainData.Condition">
+            <summary>
+            列車の運行状況を取得します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.TrainData.NowPosition">
+            <summary>
+            列車の現在位置を取得します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.TrainData.SetTrainName(System.String,System.String)">
+            <summary>
+            列車名に関わる情報を設定します。
+            </summary>
+            <param name="trainNameString">列車名を表す文字列。</param>
+            <param name="trainTypeString">列車種別を表す文字列。</param>
+        </member>
+        <member name="M:TrainInfo.TrainData.SetTime(System.String,System.Int32)">
+            <summary>
+            列車の出発または到着の時刻を設定します。
+            </summary>
+            <param name="timeString">時刻を表す文字列。</param>
+            <param name="nowHour">現在の時間。日付の補正に使用します。</param>
+        </member>
+        <member name="M:TrainInfo.TrainData.SetDestination(System.String)">
+            <summary>
+            列車の行先を設定します。
+            </summary>
+            <param name="destinationString">行先を表す文字列。</param>
+        </member>
+        <member name="M:TrainInfo.TrainData.SetCondition(System.String,System.String,System.String)">
+            <summary>
+            列車の運行状況を設定します。
+            </summary>
+            <param name="conditionString">運行状況を表す番号。</param>
+            <param name="suspendRangeStating">運休区間を表す文字列。</param>
+            <param name="delayStatusString">遅延状況を表す文字列。</param>
+        </member>
+        <member name="M:TrainInfo.TrainData.SetCondition(System.Int32,System.String,System.String)">
+            <summary>
+            列車の運行状況を設定します。
+            </summary>
+            <param name="condition">運行状況を表す番号。</param>
+            <param name="suspendRangeStating">運休区間を表す文字列。</param>
+            <param name="delayStatusString">遅延状況を表す文字列。</param>
+        </member>
+        <member name="M:TrainInfo.TrainData.SetNowPosition(System.String)">
+            <summary>
+            列車の現在位置を設定します。
+            </summary>
+            <param name="trainPositionString">現在位置を表す文字列。</param>
+        </member>
+        <member name="M:TrainInfo.TrainData.ToString">
+            <summary>
+            このインスタンスを表す文字列を取得します。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TrainInfo.TrainDataFile">
+            <summary>
+            解析済みの列車データセットを表します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.TrainDataFile.Station">
+            <summary>
+            データの取得対象の駅を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.TrainDataFile.GetedDateTime">
+            <summary>
+            取得日時を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.TrainDataFile.DepartureTrainDatas">
+            <summary>
+            出発列車の情報を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainInfo.TrainDataFile.ArrivalTrainDatas">
+            <summary>
+            到着列車の情報を取得または設定します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.TrainDataFile.SearchArrivalTrainDataWithPosition(TrainInfo.Models.JrhLine,TrainInfo.Models.JrhDestType)">
+            <summary>
+            路線を指定してその路線上のすべての列車を取得します。
+            </summary>
+            <param name="lineDestPair">対象の路線。</param>
+            <returns></returns>
+        </member>
+        <member name="T:TrainInfo.TrainInfoReader">
+            <summary>
+            列車運行情報の取得を提供します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.TrainInfoReader.GetTrainDataById(System.Int32)">
+            <summary>
+            駅 ID を指定して列車情報を取得します。
+            </summary>
+            <param name="id">取得対象の駅 ID。</param>
+            <returns>解析済みの列車情報。</returns>
+        </member>
+        <member name="M:TrainInfo.TrainInfoReader.GetTrainDataJsonById(System.Int32)">
+            <summary>
+            駅IDを指定して列車情報の Json データを取得します。
+            デバッグ等で生データが必要な場合のみこのメソッドを使用してください。
+            通常は <see cref="M:TrainInfo.TrainInfoReader.GetTrainDataById(System.Int32)"/> の呼び出しが推奨されます。
+            </summary>
+            <param name="id">取得対象の駅 ID。</param>
+            <returns>列車情報を表す Json データ。</returns>
+        </member>
+        <member name="M:TrainInfo.TrainInfoReader.DeserializeTrainInfo(System.String)">
+            <summary>
+            運行情報の Json データをデシリアライズします。
+            </summary>
+            <param name="trainInfoJson">列車情報の Json データ。</param>
+            <returns>運行情報の生データ。</returns>
+        </member>
+        <member name="M:TrainInfo.TrainInfoReader.DeserializeSpecialTrainInfo(System.String)">
+            <summary>
+            運行情報の Json データをデシリアライズします。
+            </summary>
+            <param name="trainInfoJson">列車情報の Json データ。</param>
+            <returns>運行情報の生データ。</returns>
+        </member>
+        <member name="M:TrainInfo.TrainInfoReader.ParseRawStationTrainData(TrainInfo.RawStationTrainData)">
+            <summary>
+            運行情報の生データを解析します。
+            </summary>
+            <param name="data">運行情報の生データ。</param>
+            <returns>解析された運行情報データ。</returns>
+        </member>
+        <member name="T:TrainInfo.RawTrainDataFormatExeption">
+            <summary>
+            未加工列車データの正式が正しくないときに発生する例外です。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.RawTrainDataFormatExeption.#ctor">
+            <summary>
+            <see cref="T:TrainInfo.RawTrainDataFormatExeption"/> クラスの新しいインスタンスを、規定のエラーメッセージで初期化します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.RawTrainDataFormatExeption.#ctor(System.String)">
+            <summary>
+            <see cref="T:TrainInfo.RawTrainDataFormatExeption"/> クラスの新しいインスタンスを、エラーメッセージを指定して初期化します。
+            </summary>
+            <param name="message">エラーメッセージ。</param>
+        </member>
+        <member name="M:TrainInfo.RawTrainDataFormatExeption.#ctor(System.String,System.Exception)">
+            <summary>
+            <see cref="T:TrainInfo.RawTrainDataFormatExeption"/> クラスの新しいインスタンスを、エラーメッセージと内部例外を指定して初期化します。
+            </summary>
+            <param name="message">エラーメッセージ。</param>
+            <param name="exception">内部例外。</param>
+        </member>
+        <member name="T:TrainInfo.TrainDataWithPosition">
+            <summary>
+            位置情報つきの列車情報を表します。
+            </summary>
+        </member>
+        <member name="M:TrainInfo.TrainDataWithPosition.#ctor(System.Int32)">
+            <summary>
+            <see cref="T:TrainInfo.TrainDataWithPosition" /> クラスの新しいインスタンスを駅数から初期化します。
+            </summary>
+            <param name="stationCount"></param>
+        </member>
+        <member name="T:TrainDataSet">
+            <summary>
+            同じ方面の列車データのセットを表します。
+            </summary>
+        </member>
+        <member name="P:TrainDataSet.TrainDatas">
+            <summary>
+            列車データのセットを取得または設定します。
+            </summary>
+        </member>
+        <member name="P:TrainDataSet.DestType">
+            <summary>
+            行先の方面を取得または設定します。
+            </summary>
+        </member>
+        <member name="M:TrainDataSet.ToString">
+            <summary>
+            このクラスを表す文字列を取得します。
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
