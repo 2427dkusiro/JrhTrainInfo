@@ -1,0 +1,32 @@
+﻿<Window x:Class="TrainInfoWPF.Debuger.Views.AutoDataLoader"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrainInfoWPF.Debuger.Views"
+        xmlns:uc="clr-namespace:TrainInfoWPF.Debuger"
+        mc:Ignorable="d"
+        Title="AutoDataLoader" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Label Content="取得開始時刻" />
+            <TextBox x:Name="StartTimeTextBox" />
+
+            <Label Content="主要駅取得間隔(分)" />
+            <TextBox x:Name="SyuyoEkiTimeTextBox" Text="10" />
+
+            <Label Content="通常駅取得間隔(分)" />
+            <TextBox x:Name="TsuzyoEkiTimeTextBox" Text="30" />
+
+            <Button x:Name="DoButton" Content="取得開始" Margin="10,10,10,10" Height="50" Click="DoButton_Click" />
+
+        </StackPanel>
+
+        <uc:DebugConsoleWindow x:Name="LogText" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+    </Grid>
+</Window>

@@ -1,0 +1,41 @@
+﻿<Window x:Class="TrainInfoWPF.Debuger.DataManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrainInfoWPF.Debuger"
+        mc:Ignorable="d"
+        Title="DataManager" Width="600" Height="800">
+    <Grid>
+        <StackPanel Margin="5,5,5,5">
+
+            <GroupBox Header="データ取得元の設定" Margin="0,5,0,5">
+                <StackPanel Margin="0,5,0,5">
+                    <CheckBox x:Name="DoRedirectCheckBox" Content="データ入力元をローカルにリダイレクトする"  Margin="5,5,5,5" IsChecked="False" Checked="DoRedirectCheckBox_Checked" Unchecked="DoRedirectCheckBox_Unchecked"/>
+                    <TextBox x:Name="RedirectSourceTextBox" Text="" Margin="5,5,5,5" VerticalAlignment="Stretch"/>
+                    <Button x:Name="ChangeRedirectSourceButton" Content="リダイレクト元フォルダの参照..." VerticalAlignment="Stretch" Margin="5,5,5,5" Height="50" Click="ChangeRedirectSourceButton_Click" />
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="情報のプレビューと保存"  Margin="0,5,0,5">
+                <StackPanel Margin="0,5,0,5">
+                    <TextBox x:Name="StationIdTextBox" Text="駅IDまたは駅名を入力..." Margin="5,5,5,5" GotFocus="StationIdTextBox_GotFocus" />
+                    <Button x:Name="OpenJsonButton" Content="運行情報Jsonを開いてプレビューする..." Height="50" Margin="5,5,5,5" Click="OpenJsonButton_Click"/>
+                    <Button x:Name="ViewJsonButton" Content="解析済みJsonをプレビューする..." Height="50" Margin="5,5,5,5" Click="ViewJsonButton_Click"/>
+                    <Button x:Name="PreviewCurrentButton" Content="現在の運行情報をプレビューする..."  Height="50" Margin="5,5,5,5" Click="PreviewCurrentButton_Click" />
+                    <Button x:Name="SaveJsonButton" Content="現在の運行情報をJsonに保存する..."  Height="50" Margin="5,5,5,5" Click="SaveJsonButton_Click" />
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Header="情報の一括保存"  Margin="0,5,0,5">
+                <StackPanel Margin="0,5,0,5">
+                    <Button x:Name="SaveAllEndButton" Content="すべての終着駅の現在の運行情報をJsonに保存する..." Height="50" Margin="5,5,5,5" Click="SaveAllEndButton_Click" />
+                    <Button x:Name="OpenSaveToolButton" Content="継続的データ保存ツールを開く..." Height="50" Margin="5,5,5,5" Click="OpenSaveToolButton_Click" />
+                    <Button x:Name="MargeTrainDataButton" Content="運行情報データを結合する..." Height="50" Margin="5,5,5,5" Click="MargeTrainDataButton_Click" />
+                </StackPanel>
+            </GroupBox>
+
+
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,23 @@
+﻿<Window x:Class="TrainInfoWPF.Debuger.TrainDataFileViewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrainInfoWPF.Debuger"
+        mc:Ignorable="d"
+        Title="StationDataViewer" Height="450" Width="800">
+
+    <TabControl>
+        <TabItem Header="出発列車" IsSelected="True">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" >
+                <Grid x:Name="DiparturesGrid" />
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="到着列車" IsSelected="False">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" >
+                <Grid x:Name="ArrivalsGrid" />
+            </ScrollViewer>
+        </TabItem>
+    </TabControl>
+
+</Window>
