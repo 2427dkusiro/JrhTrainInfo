@@ -188,9 +188,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\TrainInfo Rev2\TrainInfo Rev2\TrainInfo Rev2.csproj">
-      <Project>{488958a6-8a84-4384-b3ad-629a90e386d0}</Project>
-      <Name>TrainInfo Rev2</Name>
+    <ProjectReference Include="..\TrainInfoCommonComponents\TrainInfo.csproj">
+      <Project>{e99c295a-bc06-4268-b8b4-6a95aedaf120}</Project>
+      <Name>TrainInfo</Name>
     </ProjectReference>
     <ProjectReference Include="..\TrainPositionView\TrainPositionView.csproj">
       <Project>{e5046be8-28d4-43ac-ad3d-661a6c019b79}</Project>

@@ -81,9 +81,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\TrainInfo Rev2\TrainInfo Rev2\TrainInfo Rev2.csproj">
-      <Project>{08cb68cd-2e36-418d-a13f-4cab8a729d5c}</Project>
-      <Name>TrainInfo Rev2</Name>
+    <ProjectReference Include="..\TrainInfoCommonComponents\TrainInfo.csproj">
+      <Project>{e99c295a-bc06-4268-b8b4-6a95aedaf120}</Project>
+      <Name>TrainInfo</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
