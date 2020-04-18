@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Android.Content;
+﻿using Android.Content;
 using Android.Views;
+using System;
+using System.Collections.Generic;
 
-namespace App1
+namespace JrhTrainInfoAndroid
 {
     public partial class HierarchyButtonLayout
     {
@@ -18,6 +18,8 @@ namespace App1
             public abstract void OnClick(HierarchyButtonClickEventArgs e);
 
             public abstract ViewGroup BuildView(Context context);
+
+            public abstract ViewGroup GetView(Context context, out bool IsCache);
 
             public abstract string Description { get; set; }
 

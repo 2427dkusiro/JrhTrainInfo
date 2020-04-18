@@ -12,6 +12,7 @@
         android:id="@+id/mainTopToolbar"
         android:background="@color/colorPrimary"
         app:contentInsetStart="0dp"
+        android:elevation="4dp"
         >
 
         <LinearLayout
@@ -36,7 +37,7 @@
                  />
 
                 <ImageView
-                    android:id="@id/FavoriteButton"
+                    android:id="@+id/FavoriteButton"
                     android:src="@drawable/AddFavoriteIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -53,7 +54,7 @@
 
                 <ImageView
                     android:id="@+id/BackButton"
-                    android:src="@drawable/LeftArrowSignIcon"
+                    android:src="@drawable/leftarrowsignicon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"

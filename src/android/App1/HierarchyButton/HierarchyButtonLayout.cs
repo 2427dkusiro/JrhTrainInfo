@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics.Drawables;
-using Android.Locations;
 using Android.Views;
 using Android.Widget;
+using System;
+using System.Collections.Generic;
 
-namespace App1
+namespace JrhTrainInfoAndroid
 {
     public partial class HierarchyButtonLayout
     {
@@ -27,10 +24,7 @@ namespace App1
             currentParent = RootButton;
         }
 
-        static HierarchyButtonLayout()
-        {
-            InitializeLayoutParams();
-        }
+        static HierarchyButtonLayout() => InitializeLayoutParams();
 
         private static void InitializeLayoutParams()
         {
@@ -99,9 +93,6 @@ namespace App1
 
         private void BuildLayout(HierarchyButton parentHierarchyButton)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
             mainLinearLayout.RemoveAllViews();
             var IsFirst = true;
 
@@ -118,45 +109,36 @@ namespace App1
                 {
                     mainLinearLayout.AddView(CreateUnderLine(), horizontalLineLayoutParams);
                 }
-
                 var layout = CreateRelativeLayoutButton(button);
-                mainLinearLayout.AddView(layout, buttonLayoutParams);
 
+                mainLinearLayout.AddView(layout, buttonLayoutParams);
                 IsFirst = false;
             }
-
-            Debug.WriteLine(stopwatch.ElapsedMilliseconds);
         }
 
 
         private ViewGroup CreateRelativeLayoutButton(HierarchyButton hierarchyButton)
         {
-            var buttonRelativeLayout = hierarchyButton.BuildView(context);
-            buttonRelativeLayout.SetPadding(50, 0, 50, 0);
-            buttonRelativeLayout.Clickable = true;
+            var buttonRelativeLayout = hierarchyButton.GetView(context, out var isCache);
 
-            var stateListDrawable = new StateListDrawable();
-            stateListDrawable.AddState(new int[] { -Android.Resource.Attribute.StatePressed }, new ColorDrawable(Android.Graphics.Color.Argb
-                (BackGroundColor[0], BackGroundColor[1], BackGroundColor[2], BackGroundColor[3])));
-            stateListDrawable.AddState(new int[] { Android.Resource.Attribute.StatePressed }, new ColorDrawable(Android.Graphics.Color.Argb
-                (PressedBackGroundColor[0], PressedBackGroundColor[1], PressedBackGroundColor[2], PressedBackGroundColor[3])));
-
-            buttonRelativeLayout.Background = stateListDrawable;
-            buttonRelativeLayout.Click += ButtonRelativeLayout_Click;
-
-            var id = View.GenerateViewId();
-            buttonRelativeLayout.Id = id;
-            buttonDictionary.Add(id, hierarchyButton);
-
-            /*
-            if (showUnderLine)
+            if (!isCache)
             {
-                var horizontalLine = new View(context);
-                horizontalLine.SetBackgroundColor(Android.Graphics.Color.Argb(255, 180, 180, 180));
-                buttonRelativeLayout.AddView(horizontalLine, horizontalLineLayoutParams);
-            }
-            */
+                buttonRelativeLayout.SetPadding(50, 0, 50, 0);
+                buttonRelativeLayout.Clickable = true;
 
+                var stateListDrawable = new StateListDrawable();
+                stateListDrawable.AddState(new int[] { -Android.Resource.Attribute.StatePressed }, new ColorDrawable(Android.Graphics.Color.Argb
+                    (BackGroundColor[0], BackGroundColor[1], BackGroundColor[2], BackGroundColor[3])));
+                stateListDrawable.AddState(new int[] { Android.Resource.Attribute.StatePressed }, new ColorDrawable(Android.Graphics.Color.Argb
+                    (PressedBackGroundColor[0], PressedBackGroundColor[1], PressedBackGroundColor[2], PressedBackGroundColor[3])));
+
+                buttonRelativeLayout.Background = stateListDrawable;
+                buttonRelativeLayout.Click += ButtonRelativeLayout_Click;
+
+                var id = View.GenerateViewId();
+                buttonRelativeLayout.Id = id;
+                buttonDictionary.Add(id, hierarchyButton);
+            }
             return buttonRelativeLayout;
         }
 
@@ -171,8 +153,6 @@ namespace App1
         {
             var clickedLayout = (RelativeLayout)sender;
             var clickedButton = buttonDictionary[clickedLayout.Id];
-
-            Debug.WriteLine($"Button Clicked! {clickedButton.Description}");
 
             var args = new HierarchyButtonClickEventArgs();
             clickedButton.OnClick(args);
@@ -195,6 +175,11 @@ namespace App1
             public override string Description { get; set; }
 
             public RootHierarchyButton() { }
+
+            public override ViewGroup GetView(Context context, out bool IsCache)
+            {
+                throw new InvalidOperationException();
+            }
 
             public override void OnClick(HierarchyButtonClickEventArgs e)
             {

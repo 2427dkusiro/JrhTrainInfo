@@ -1,16 +1,16 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Support.V4.Widget;
 using Android.Views;
 using Android.Widget;
+using System;
 using TrainInfo;
 using TrainInfo.ExtensionMethods;
 using TrainInfo.Stations;
 
-namespace App1
+namespace JrhTrainInfoAndroid
 {
     [Activity(Label = "TrainPositionActicity")]
     public class TrainPositionActicity : Activity
@@ -18,27 +18,56 @@ namespace App1
         private LinearLayout trainPostionLinearLayout;
         private JrhLine jrhLine;
         private SwipeRefreshLayout swipeRefreshLayout;
+        private TextView GettedTimeTextView;
+        private bool IsFavorited;
+        private ImageView favoriteButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.TrainPosition);
-            // Create your application here
-            trainPostionLinearLayout = FindViewById<LinearLayout>(Resource.Id.TrainpositionLinearLayout);
+            Window.SetStatusBarColor(new Android.Graphics.Color(Android.Support.V4.Content.ContextCompat.GetColor(this, Resource.Color.colorPrimary)));
+
             var line = Intent.GetStringExtra("Line");
-
-            var backButton = FindViewById<Button>(Resource.Id.BackButton);
-            backButton.Click += BackButton_Click;
-
-            //呼び出し元で選択された路線を解析
             jrhLine = JrhLineCreater.FromString(line);
-            var TitleTextView = FindViewById<TextView>(Resource.Id.ToolbarText);
-            TitleTextView.Text = jrhLine.GetName();
 
+            trainPostionLinearLayout = FindViewById<LinearLayout>(Resource.Id.TrainpositionLinearLayout);
+            var backButton = FindViewById<ImageView>(Resource.Id.BackButton);
+            favoriteButton = FindViewById<ImageView>(Resource.Id.FavoriteButton);
+            var TitleTextView = FindViewById<TextView>(Resource.Id.ToolbarText);
             swipeRefreshLayout = FindViewById<SwipeRefreshLayout>(Resource.Id.swipe_refresh);
+            GettedTimeTextView = FindViewById<TextView>(Resource.Id.GetedTimeTextView);
+
+            favoriteButton.Click += FavoriteButton_Click;
+            backButton.Click += BackButton_Click;
+            TitleTextView.Text = jrhLine.GetName();
             swipeRefreshLayout.Refresh += SwipeRefreshLayout_Refresh;
 
+            IsFavorited = UserConfigManager.IsFavoriteLine(jrhLine);
+            favoriteButton.SetImageResource(IsFavorited ? Resource.Drawable.FavoritedIcon : Resource.Drawable.AddFavoriteIcon);
+
             RenderData(jrhLine);
+        }
+
+        private void FavoriteButton_Click(object sender, EventArgs e)
+        {
+            if (IsFavorited)
+            {
+                UserConfigManager.DeletefavoriteLine(jrhLine);
+                var toast = Toast.MakeText(this, $"{jrhLine.GetName()}を削除しました", ToastLength.Short);
+                toast.SetGravity(GravityFlags.Bottom, 0, 0);
+                toast.Show();
+                IsFavorited = false;
+            }
+            else
+            {
+                UserConfigManager.AddfavoriteLine(jrhLine);
+                var toast = Toast.MakeText(this, $"{jrhLine.GetName()}を追加しました", ToastLength.Short);
+                toast.SetGravity(GravityFlags.Bottom, 0, 0);
+                toast.Show();
+                IsFavorited = true;
+            }
+            favoriteButton.SetImageResource(IsFavorited ? Resource.Drawable.FavoritedIcon : Resource.Drawable.AddFavoriteIcon);
         }
 
         private void SwipeRefreshLayout_Refresh(object sender, EventArgs e)
@@ -130,6 +159,8 @@ namespace App1
 
                 trainPostionLinearLayout.AddView(lineRangeLinearLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, 250));
             }
+
+            GettedTimeTextView.Text = $"{ DateTime.Now.ToString()} 現在の情報";
         }
 
         private void BackButton_Click(object sender, EventArgs e)

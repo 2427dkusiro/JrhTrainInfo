@@ -14,12 +14,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_margin="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
             android:text="駅名から探す" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
             android:minWidth="200dp"
             android:id="@+id/StaionNameEditText" />
 
@@ -27,6 +29,8 @@
             android:text="検索"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:id="@+id/StationSearchButton" />
         <TextView
             android:text=""
@@ -40,9 +44,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginLeft="50px"
+            android:layout_marginLeft="20dp"
             android:layout_marginBottom="10dp"
-            android:text="路線から探す" />
+            android:text="路線から探す"
+            android:elevation="4dp" />
 
         <ScrollView
             android:layout_width="match_parent"

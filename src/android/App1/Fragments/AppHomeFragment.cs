@@ -1,68 +1,125 @@
-﻿using System;
-using System.Threading.Tasks;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using TrainInfo;
+using TrainInfo.Debuggers;
+using TrainInfo.ExtensionMethods;
 using TrainInfo.Stations;
 
-namespace App1.Resources.layout
+namespace JrhTrainInfoAndroid.Resources.layout
 {
     internal class AppHomeFragment : Android.Support.V4.App.Fragment
     {
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
             return inflater.Inflate(Resource.Layout.AppHome, container, false);
         }
 
-        private LinearLayout linearLayout;
-        public override async void OnViewCreated(View view, Bundle savedInstanceState)
+        private LinearLayout favoriteStationLayout;
+        private LinearLayout favoriteLineLayout;
+
+        public override void OnViewCreated(View view, Bundle savedInstanceState)
         {
             base.OnViewCreated(view, savedInstanceState);
-            linearLayout = view.FindViewById<LinearLayout>(Resource.Id.homeMainLinearLayout);
 
-            await RenderFavoriteData();
+            favoriteStationLayout = view.FindViewById<LinearLayout>(Resource.Id.FavoriteStationLinearLayout);
+            favoriteLineLayout = view.FindViewById<LinearLayout>(Resource.Id.FavoriteLineLinearLayout);
+            var doRedirect = view.FindViewById<CheckBox>(Resource.Id.DoRedirectCheckBox);
+            doRedirect.CheckedChange += DoRedirect_CheckedChange;
+
+            UserConfigManager.ValueChanged += UserConfigManager_ValueChanged;
+            RenderFavoriteData();
         }
 
-        private async Task RenderFavoriteData()
+        private void DoRedirect_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
-            linearLayout.RemoveAllViews();
-
-            var textView = new TextView(Context)
+            if (e.IsChecked)
             {
-                Text = "お気に入り駅",
-                TextSize = 18,
-            };
-            textView.SetPadding(10, 10, 0, 0);
-            linearLayout.AddView(textView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent));
-
-            var favorite = await GetFavoriteStations();
-            foreach (var station in favorite)
+                TrainInfoReader.SetRedirect(new InternalSavedDataReader());
+            }
+            else
             {
-                var button = new Button(Context)
+                TrainInfoReader.ClearRedirect();
+            }
+        }
+
+        private void UserConfigManager_ValueChanged(object sender, EventArgs e)
+        {
+            if (!(Context is null))
+            {
+                RenderFavoriteData();
+            }
+        }
+
+        private void RenderFavoriteData()
+        {
+            favoriteStationLayout.RemoveAllViews();
+            favoriteLineLayout.RemoveAllViews();
+
+            var favoriteStations = UserConfigManager.GetFavoriteStations();
+            var favoriteLines = UserConfigManager.GetFavoriteJehLines();
+
+            var stationButtonLayout = new HierarchyButtonLayout(Context);
+            var lineButtonLayout = new HierarchyButtonLayout(Context);
+
+            var stationButtons = favoriteStations.Select(str =>
+            {
+                var button = new HierarchyButtonLayout.HierarchyTextButton()
                 {
-                    Text = station.Name,
+                    Text = str.Name,
+                    ArrowSignDirection = HierarchyButtonLayout.HierarchyTextButton.ArrowSignDirections.Right,
                 };
                 button.Click += FavoriteStationButton_Click;
-                button.LongClick += FavoriteStationButton_LongClick;
-                linearLayout.AddView(button, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent));
-            }
+                return button;
+            });
+
+            var lineButtons = favoriteLines.Select(line =>
+            {
+                var button = new HierarchyButtonLayout.HierarchyTextButton()
+                {
+                    Text = line.GetName(),
+                    ArrowSignDirection = HierarchyButtonLayout.HierarchyTextButton.ArrowSignDirections.Right,
+                };
+                button.Click += FavoriteLineButton_Click;
+                return button;
+            });
+
+            stationButtonLayout.RootButton.AddChildren(stationButtons);
+            lineButtonLayout.RootButton.AddChildren(lineButtons);
+
+            favoriteStationLayout.AddView(stationButtonLayout.Build());
+            favoriteLineLayout.AddView(lineButtonLayout.Build());
+        }
+
+        private void FavoriteLineButton_Click(object sender, EventArgs e)
+        {
+            var intent = new Intent(Context, new TrainPositionActicity().Class);
+            intent.PutExtra("Line", ((HierarchyButtonLayout.HierarchyTextButton)sender).Text);
+            StartActivity(intent);
         }
 
         private void FavoriteStationButton_Click(object sender, EventArgs e)
         {
             var intent = new Intent(Context, new TrainTimeActivity().Class);
-            intent.PutExtra("station", ((Button)sender).Text);
+            intent.PutExtra("station", ((HierarchyButtonLayout.HierarchyTextButton)sender).Text);
             StartActivity(intent);
         }
 
-        private string nowdeleting;
-        private async void FavoriteStationButton_LongClick(object sender, View.LongClickEventArgs e)
+
+        /*
+        private Station nowdeleting;
+        private void FavoriteStationButton_LongClick(object sender, View.LongClickEventArgs e)
         {
             var button = (Button)sender;
-            nowdeleting = button.Text;
+            nowdeleting = StationReader.GetStationByName(button.Text);
             new AlertDialog.Builder(Activity)
                 .SetTitle("削除確認")
                 .SetMessage($"{button.Text}をお気に入りから削除してよろしいですか？")
@@ -71,12 +128,6 @@ namespace App1.Resources.layout
                 .Show();
         }
 
-        private async Task<Station[]> GetFavoriteStations()
-        {
-            Station[] favorite = null;
-            await Task.Run(() => favorite = UserConfigManager.GetFavoriteStations());
-            return favorite;
-        }
 
         private void DialogResult(object sender, DialogClickEventArgs dialogClickEventArgs)
         {
@@ -90,7 +141,7 @@ namespace App1.Resources.layout
                     break;
             }
             nowdeleting = null;
-            RenderFavoriteData();
         }
+        */
     }
 }

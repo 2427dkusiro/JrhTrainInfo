@@ -1,28 +1,32 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.OS;
+using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Views;
 using Android.Widget;
+using System;
 using TrainInfo;
 using TrainInfo.Debuggers;
 using Fragment = Android.Support.V4.App.Fragment;
+using Android.Support.V7.Widget;
+using Toolbar = Android.Support.V7.Widget.Toolbar;
+using Android.Support.V7.App;
+using SearchView = Android.Support.V7.Widget.SearchView;
 
-
-namespace App1
+namespace JrhTrainInfoAndroid
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
-    public class MainActivity : FragmentActivity
+    public class MainActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            TrainInfoReader.SetRedirect(new InternalSavedDataReader());
-
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
             Window.SetStatusBarColor(new Android.Graphics.Color(Android.Support.V4.Content.ContextCompat.GetColor(this, Resource.Color.colorPrimary)));
+
+            SetSupportActionBar(FindViewById<Toolbar>(Resource.Id.mainTopToolbar2));
 
             var myFragmentPagerAdapter = new MyFragmentPagerAdapter(SupportFragmentManager);
             var viewPager = FindViewById<ViewPager>(Resource.Id.viewPager1);
@@ -60,10 +64,30 @@ namespace App1
                     throw new NotSupportedException();
             }
         }
+
+        SearchView searchView;
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            this.MenuInflater.Inflate(Resource.Menu.search1, menu);
+
+            var searchItem = menu.FindItem(Resource.Id.action_search);
+
+            searchView = searchItem.ActionView.JavaCast<SearchView>();
+
+            if (!(searchView is null))
+            {
+                searchView.QueryTextSubmit += (sender, args) =>
+                {
+                    Toast.MakeText(this, "You searched: " + args.Query, ToastLength.Short).Show();
+                };
+            }
+            return base.OnCreateOptionsMenu(menu);
+
+        }
     }
 
     [Obsolete("デバッグ専用")]
-    internal class SampleFragment : Fragment
+    internal class SampleFragment : Android.Support.V4.App.Fragment
     {
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {

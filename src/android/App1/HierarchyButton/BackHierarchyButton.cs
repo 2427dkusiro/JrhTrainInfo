@@ -1,9 +1,9 @@
-﻿using System;
-using Android.Content;
+﻿using Android.Content;
 using Android.Views;
 using Android.Widget;
+using System;
 
-namespace App1
+namespace JrhTrainInfoAndroid
 {
     public partial class HierarchyButtonLayout
     {
@@ -16,16 +16,14 @@ namespace App1
             /// <summary>
             /// <see cref="HierarchyTextButton"/>クラスの新しいインスタンスを初期化します。
             /// </summary>
-            public BackHierarchyButton()
-            {
-
-            }
+            public BackHierarchyButton() => needReflesh = true;
 
             /// <summary>
             /// <see cref="HierarchyTextButton"/>クラスの新しいインスタンスを初期化します。
             /// </summary>
             public BackHierarchyButton(HierarchyButton parent)
             {
+                needReflesh = true;
                 Parent = parent;
             }
 
@@ -47,21 +45,44 @@ namespace App1
             }
 
             /// <summary>
-            /// このボタンのテキストを取得または設定します。
+            /// このボタンのテキストを取得します。
             /// </summary>
             public string Text => $"{Parent.Parent.Description}へ戻る";
 
             private string description;
             public override string Description
             {
-                get { return description ?? Text; }
-                set { description = value; }
+                get => description ?? Text;
+                set => description = value;
             }
 
+            private int textSize = 18;
             /// <summary>
             /// 文字サイズを取得または設定します。
             /// </summary>
-            public int TextSize { get; set; } = 18;
+            public int TextSize
+            {
+                get => textSize;
+                set { needReflesh = true; textSize = value; }
+            }
+
+            private bool needReflesh;
+            private ViewGroup renderCache = null;
+
+            public override ViewGroup GetView(Context context, out bool IsCache)
+            {
+                if (needReflesh)
+                {
+                    IsCache = false;
+                    needReflesh = false;
+                    return BuildView(context);
+                }
+                else
+                {
+                    IsCache = true;
+                    return renderCache;
+                }
+            }
 
             public override ViewGroup BuildView(Context context)
             {
@@ -93,7 +114,7 @@ namespace App1
             /// <param name="e"></param>
             public override void OnClick(HierarchyButtonClickEventArgs e)
             {
-                e.NextCurrentHierarchyButton = this.Parent.Parent;
+                e.NextCurrentHierarchyButton = Parent.Parent;
                 e.LayoutChanged = true;
                 Click?.Invoke(this, e);
             }

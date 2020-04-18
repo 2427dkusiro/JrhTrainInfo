@@ -2,56 +2,81 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Xml.Serialization;
+using TrainInfo.ExtensionMethods;
 using TrainInfo.Stations;
 
 
-namespace App1
+namespace JrhTrainInfoAndroid
 {
     internal static class UserConfigManager
     {
-        private static List<string> favoriteStations;
-        private static string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "favoriteConfig.txt";
+        private static string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "UserConfig.txt";
         private static XmlSerializer xmlSerializer;
+
+        private static UserConfigData userConfigData;
+
+        public static event EventHandler ValueChanged;
 
         static UserConfigManager()
         {
-            xmlSerializer = new XmlSerializer(typeof(List<string>));
+            xmlSerializer = new XmlSerializer(typeof(UserConfigData));
             try
             {
                 using (var streamReader = new StreamReader(path, new UTF8Encoding(false)))
                 {
-                    favoriteStations = (List<string>)xmlSerializer.Deserialize(streamReader);
+                    //var str = streamReader.ReadToEnd();
+                    userConfigData = (UserConfigData)xmlSerializer.Deserialize(streamReader);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                favoriteStations = new List<string>();
+                userConfigData = new UserConfigData();
             }
         }
 
-        public static Station[] GetFavoriteStations()
+        public static IEnumerable<Station> GetFavoriteStations()
         {
-            return favoriteStations.Select(sta => StationReader.GetStationByName(sta)).ToArray();
+            return userConfigData.GetFavoriteStations();
         }
 
-        public static bool IsFavoriteStation(string station)
+        public static IEnumerable<JrhLine> GetFavoriteJehLines()
         {
-            return favoriteStations.Contains(station);
+            return userConfigData.GetFavoriteJrhLines();
         }
 
         public static bool IsFavoriteStation(Station station)
         {
-            return favoriteStations.Contains(station.Name);
+            return userConfigData.FavoriteStationString.Contains(station.Name);
+        }
+
+        public static bool IsFavoriteLine(JrhLine jrhLine)
+        {
+            return userConfigData.FavoriteLineString.Contains(jrhLine.GetName());
         }
 
         public static bool AddfavoriteStation(Station station)
         {
-            if (!favoriteStations.Any(sta => sta == station.Name))
+            if (!userConfigData.FavoriteStationString.Any(sta => sta == station.Name))
             {
-                favoriteStations.Add(station.Name);
-                SaveFavoriteStation();
+                userConfigData.FavoriteStationString.Add(station.Name);
+                SaveUserConfig();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool AddfavoriteLine(JrhLine jrhLine)
+        {
+            if (!userConfigData.FavoriteLineString.Any(line => line == jrhLine.GetName()))
+            {
+                userConfigData.FavoriteLineString.Add(jrhLine.GetName());
+                SaveUserConfig();
                 return true;
             }
             else
@@ -62,28 +87,61 @@ namespace App1
 
         public static void DeleteFavoriteStation(Station station)
         {
-            if (favoriteStations.Any(sta => sta == station.Name))
+            if (userConfigData.FavoriteStationString.Any(sta => sta == station.Name))
             {
-                favoriteStations.Remove(station.Name);
-                SaveFavoriteStation();
+                userConfigData.FavoriteStationString.Remove(station.Name);
+                SaveUserConfig();
             }
         }
 
-        public static void DeleteFavoriteStation(string station)
+        public static void DeletefavoriteLine(JrhLine jrhLine)
         {
-            if (favoriteStations.Any(sta => sta == station))
+            if (userConfigData.FavoriteLineString.Any(line => line == jrhLine.GetName()))
             {
-                favoriteStations.Remove(station);
-                SaveFavoriteStation();
+                userConfigData.FavoriteLineString.Remove(jrhLine.GetName());
+                SaveUserConfig();
             }
         }
 
-        private static void SaveFavoriteStation()
+        private static void SaveUserConfig()
         {
             using (var streamWriter = new StreamWriter(path, false, new UTF8Encoding(false)))
             {
-                xmlSerializer.Serialize(streamWriter, favoriteStations);
+                xmlSerializer.Serialize(streamWriter, userConfigData);
             }
+            ValueChanged?.Invoke(userConfigData, new EventArgs());
+        }
+    }
+
+    [Serializable]
+    public class UserConfigData
+    {
+        public UserConfigData()
+        {
+            FavoriteStationString = new List<string>();
+            FavoriteLineString = new List<string>();
+        }
+
+        public UserConfigData(List<string> favoriteStationString, List<string> favoriteLineString)
+        {
+            FavoriteStationString = favoriteStationString ?? new List<string>();
+            FavoriteLineString = favoriteLineString ?? new List<string>();
+        }
+
+        public Version Version { get; } = Assembly.GetExecutingAssembly().GetName().Version;
+
+        public List<string> FavoriteStationString { get; }
+
+        public IEnumerable<Station> GetFavoriteStations()
+        {
+            return FavoriteStationString.Select(str => StationReader.GetStationByName(str));
+        }
+
+        public List<string> FavoriteLineString { get; }
+
+        public IEnumerable<JrhLine> GetFavoriteJrhLines()
+        {
+            return FavoriteLineString.Select(str => JrhLineCreater.FromString(str));
         }
     }
 }

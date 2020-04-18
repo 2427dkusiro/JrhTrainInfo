@@ -1,10 +1,10 @@
 ﻿using Android.Support.V4.App;
-using App1.Resources.layout;
 using Java.Lang;
+using JrhTrainInfoAndroid.Resources.layout;
 using Fragment = Android.Support.V4.App.Fragment;
 using FragmentManager = Android.Support.V4.App.FragmentManager;
 
-namespace App1
+namespace JrhTrainInfoAndroid
 {
     public class MyFragmentPagerAdapter : FragmentPagerAdapter
     {

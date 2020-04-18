@@ -1,59 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/mainTopToolbar"
-    android:background="@color/colorPrimary">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mainTopToolbar"
+        android:background="@color/colorPrimary"
+        app:contentInsetStart="0dp"
+        android:elevation="4dp"
+        >
 
-        <TextView
-            android:id="@+id/ToolbarText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Title"
-            android:textSize="20sp"
-            android:layout_gravity="center_horizontal"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
 
-        <Button
-            android:id="@+id/FavoriteButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="☆"
-            android:layout_marginRight="10dp"
-        />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                 >
 
-        <Button
-            android:id="@+id/BackButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:text="戻る"
-            android:layout_marginLeft="10dp"
-        />
+                <TextView
+                    android:id="@+id/ToolbarText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:layout_centerInParent="true"
+                 />
+
+                <ImageView
+                    android:id="@+id/FavoriteButton"
+                    android:src="@drawable/AddFavoriteIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="0dp"
+                    android:maxHeight="50dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/ToolbarButtonColorSelector"
+                />
+
+                <ImageView
+                    android:id="@+id/BackButton"
+                    android:src="@drawable/LeftArrowSignIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="0dp"
+                    android:maxHeight="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/ToolbarButtonColorSelector"
+                />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:minHeight="20dp"
+                 >
+
+                <TextView
+                    android:id="@+id/GetedTimeTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    android:layout_centerInParent="true"
+                />
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
-        <LinearLayout 
-            android:id="@+id/TrainpositionLinearLayout"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <LinearLayout
+                android:id="@+id/TrainpositionLinearLayout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>

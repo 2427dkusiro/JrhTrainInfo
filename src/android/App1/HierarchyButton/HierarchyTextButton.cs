@@ -1,12 +1,11 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Cryptography;
-using Android.Content;
+﻿using Android.Content;
 using Android.Views;
 using Android.Widget;
+using System;
+using System.Linq;
+using Debug = System.Diagnostics.Debug;
 
-namespace App1
+namespace JrhTrainInfoAndroid
 {
     public partial class HierarchyButtonLayout
     {
@@ -15,10 +14,10 @@ namespace App1
         /// </summary>
         public class HierarchyTextButton : HierarchyButton
         {
-            private static RelativeLayout.LayoutParams rightArrowSignTextLayoutParams;
-            private static RelativeLayout.LayoutParams leftArrowSignTextLayoutParams;
-            private static RelativeLayout.LayoutParams rightArrowSignImageLayoutParams;
-            private static RelativeLayout.LayoutParams leftArrowSignLayoutParams;
+            private static readonly RelativeLayout.LayoutParams rightArrowSignTextLayoutParams;
+            private static readonly RelativeLayout.LayoutParams leftArrowSignTextLayoutParams;
+            private static readonly RelativeLayout.LayoutParams rightArrowSignImageLayoutParams;
+            private static readonly RelativeLayout.LayoutParams leftArrowSignLayoutParams;
             private static readonly int leftArrowSignImageId;
 
             /// <summary>
@@ -58,41 +57,87 @@ namespace App1
                 leftArrowSignLayoutParams.LeftMargin = 30;
             }
 
-            private bool NeedRendering = true;
-            private ViewGroup RenderCache = null;
+            private bool needReflesh = true;
+            private ViewGroup renderCache = null;
 
             private string description;
+            private string text;
+            private int textSize = 18;
+            private ArrowSignDirections arrowSignDirection = ArrowSignDirections.Right;
+
+
             public override string Description
             {
-                get { return description ?? Text; }
-                set { description = value; }
+                get => description ?? Text;
+                set => description = value;
             }
 
             /// <summary>
             /// このボタンのテキストを取得または設定します。
             /// </summary>
-            public string Text { get; set; }
+            public string Text
+            {
+                get => text;
+                set { needReflesh = true; text = value; }
+            }
 
             /// <summary>
             /// 文字サイズを取得または設定します。
             /// </summary>
-            public int TextSize { get; set; } = 18;
+            public int TextSize
+            {
+                get => textSize;
+                set { needReflesh = true; textSize = value; }
+            }
 
             /// <summary>
             /// 矢印アイコンの向きを取得または設定します。
             /// </summary>
-            public ArrowSignDirections ArrowSignDirection { get; set; } = ArrowSignDirections.Right;
+            public ArrowSignDirections ArrowSignDirection
+            {
+                get => arrowSignDirection;
+                set { needReflesh = true; arrowSignDirection = value; }
+            }
 
             public override event EventHandler Click;
 
+            public override ViewGroup GetView(Context context, out bool IsCache)
+            {
+                if (needReflesh)
+                {
+                    Debug.WriteLine("return new rendered button!");
+                    IsCache = false;
+                    needReflesh = false;
+                    return BuildView(context);
+                }
+                else
+                {
+                    try
+                    {
+                        if (renderCache.Class is null)
+                        {
+                            throw new InvalidOperationException();
+                        }
+                    }
+                    catch (ObjectDisposedException ex)
+                    {
+                        Debug.WriteLine("Error!\n" +
+                                        "-----------------------------\n" +
+                                           "Cached view was disposed!\n" +
+                                        "-----------------------------");
+
+                        IsCache = false;
+                        return BuildView(context);
+                    }
+
+                    Debug.WriteLine("return cache button!");
+                    IsCache = true;
+                    return renderCache;
+                }
+            }
+
             public override ViewGroup BuildView(Context context)
             {
-                if (!(RenderCache is null))
-                {
-                    //Debug.WriteLine("キャッシュデータを返しました");
-                    return RenderCache;
-                }
-
                 var buttonRelativeLayout = new RelativeLayout(context);
 
                 var textView = new TextView(context)
@@ -102,7 +147,7 @@ namespace App1
                     Gravity = GravityFlags.CenterVertical,
                 };
 
-                if (this.ArrowSignDirection == ArrowSignDirections.Left)
+                if (ArrowSignDirection == ArrowSignDirections.Left)
                 {
                     var imageView = new ImageView(context);
                     imageView.SetImageResource(Resource.Drawable.LeftArrowSignIcon);
@@ -112,7 +157,7 @@ namespace App1
                     buttonRelativeLayout.AddView(imageView, leftArrowSignLayoutParams);
                     buttonRelativeLayout.AddView(textView, leftArrowSignTextLayoutParams);
                 }
-                else if (this.ArrowSignDirection == HierarchyTextButton.ArrowSignDirections.Right)
+                else if (ArrowSignDirection == HierarchyTextButton.ArrowSignDirections.Right)
                 {
                     var imageView = new ImageView(context);
                     imageView.SetImageResource(Resource.Drawable.RightArrowSignIcon);
@@ -126,7 +171,7 @@ namespace App1
                     buttonRelativeLayout.AddView(textView);
                 }
 
-                RenderCache = buttonRelativeLayout;
+                renderCache = buttonRelativeLayout;
                 return buttonRelativeLayout;
             }
 
