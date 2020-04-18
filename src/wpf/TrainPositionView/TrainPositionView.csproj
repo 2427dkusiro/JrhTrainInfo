@@ -81,8 +81,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TrainInfoCommonComponents\TrainInfo.csproj">
-      <Project>{e99c295a-bc06-4268-b8b4-6a95aedaf120}</Project>
+    <ProjectReference Include="..\..\core\TrainInfo\TrainInfo.csproj">
+      <Project>{d831a782-da35-44fa-911a-5ca7ca334662}</Project>
       <Name>TrainInfo</Name>
     </ProjectReference>
   </ItemGroup>

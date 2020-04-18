@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorPrimary">#badcad</color>
+  <color name="SelectedTab">#badcad</color>
+  <color name="UnSelectedTab">#cef0be</color>
+  <color name="colorPrimaryDark">#b0d2a3</color>
+  <color name="colorAccent">#3498db</color>
+</resources>
