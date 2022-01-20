@@ -12,7 +12,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        
+
         <Menu Margin="0,2,0,2">
             <MenuItem Header="ファイル" />
             <MenuItem Header="編集" />
@@ -20,11 +20,15 @@
                 <MenuItem Header="駅列車情報ウィンドウ" Click="StationDataWindowOpenMenu_Click" />
             </MenuItem>
         </Menu>
-       
-        <TabControl x:Name="MainTab" Grid.Row="1">
-            <cc:ClosableTabItem Header="スタート">
-                <TextBlock Text="スタートメニュー" />
-            </cc:ClosableTabItem>
-        </TabControl>
+
+        <Grid Grid.Row="1" Background="LightGray">
+            <TabControl x:Name="MainTab" BorderThickness="0">
+                <TabControl.Resources>
+                    <Style TargetType="TabPanel">
+                        <Setter Property="Background" Value="LightGray" />
+                    </Style>
+                </TabControl.Resources>
+            </TabControl>
+        </Grid>
     </Grid>
 </Window>

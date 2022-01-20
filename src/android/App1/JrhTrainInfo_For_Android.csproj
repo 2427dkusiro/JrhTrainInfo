@@ -44,6 +44,9 @@
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <AndroidHttpClientHandlerType>System.Net.Http.HttpClientHandler</AndroidHttpClientHandlerType>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidDexTool>d8</AndroidDexTool>
+    <AndroidLinkTool>r8</AndroidLinkTool>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -223,7 +226,12 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\TrainIconTokyu.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\TrainInfo\TrainInfo.csproj">
+      <Project>{b935adaf-af7f-4942-b29a-ac079ddf5284}</Project>
+      <Name>TrainInfo</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Menu\search1.xml" />
   </ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Deployment.Internal;
 using System.Linq;
 using System.Runtime;
 using System.Text;
@@ -14,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TrainInfo;
 using TrainInfoWPF.CustomControls;
+using TrainInfoWPF.Debuger;
 using TrainInfoWPF.TabUI.StationDataViewer;
 
 namespace TrainInfoWPF.MainUI
@@ -25,11 +27,15 @@ namespace TrainInfoWPF.MainUI
     {
         public Window1()
         {
+            TrainInfoReader.SetRedirect(new TrainInfo.Debuggers.InternalSavedDataReader());
             InitializeComponent();
         }
 
-        private void Window_Initialized(object sender, EventArgs e)
+        private async void Window_Initialized(object sender, EventArgs e)
         {
+            var data = await TrainInfoReader.GetTrainDataAsync(91);
+            this.AddTab(new StationDataView(data), $"駅列車情報 - {data.Station.Name}");
+            MainTab.SelectedIndex = 0;
             this.AddHandler(ClosableTabItem.TabClosedEvent, new RoutedEventHandler(CloseTab));
         }
 
@@ -46,22 +52,21 @@ namespace TrainInfoWPF.MainUI
 
         private async void StationDataWindowOpenMenu_Click(object sender, RoutedEventArgs args)
         {
-            StationDataSelectDialog stationDataSelectDialog = new StationDataSelectDialog();
-            stationDataSelectDialog.ShowDialog();
-
-            var station = stationDataSelectDialog.SelectedStation;
-            var trainData = await TrainInfoReader.GetTrainDataAsync(station.StationID);
-
-            StationDataView stationDataView = new StationDataView(trainData);
-            AddTab(stationDataView);
+            StationDataView stationDataView = await StationDataView.InitializeWithDialog();
+            if (stationDataView != null)
+            {
+                AddTab(stationDataView, $"駅列車情報 - {stationDataView.TrainDataFile.Station.Name}");
+            }
         }
 
-        private void AddTab(object content)
+        private void AddTab(Control content, string title)
         {
             MainTab.Items.Add(new ClosableTabItem()
             {
                 Content = content,
-                Header = "タイトル(仮)",
+                Header = title,
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
             });
         }
     }

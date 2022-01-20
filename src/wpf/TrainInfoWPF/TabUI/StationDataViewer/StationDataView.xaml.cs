@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using TrainInfo;
 using TrainInfo.Stations;
 using TrainInfo.ExtensionMethods;
+using System.Diagnostics;
 
 namespace TrainInfoWPF.TabUI.StationDataViewer
 {
@@ -26,25 +27,44 @@ namespace TrainInfoWPF.TabUI.StationDataViewer
     {
         public TrainDataFile TrainDataFile { get; }
 
+        public async static Task<StationDataView> InitializeWithDialog()
+        {
+            StationDataSelectDialog stationDataSelectDialog = new StationDataSelectDialog();
+            stationDataSelectDialog.ShowDialog();
+
+            var station = stationDataSelectDialog.SelectedStation;
+            if (station is null)
+            {
+                return null;
+            }
+
+            var trainData = await TrainInfoReader.GetTrainDataAsync(station.StationID);
+            StationDataView stationDataView = new StationDataView(trainData);
+            return stationDataView;
+        }
+
         public StationDataView(TrainDataFile trainDataFile)
         {
             TrainDataFile = trainDataFile;
             InitializeComponent();
+            SetData();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void SetData()
         {
-            var depGrid = BuildGridData(TrainDataFile.DepartureTrainDatas, false);
-            DeparturesGrid = depGrid;
-
-            var arrGrid = BuildGridData(TrainDataFile.ArrivalTrainDatas, true);
-            ArrivalsGrid = arrGrid;
+            BuildGridData(TrainDataFile.DepartureTrainDatas, false, DeparturesGrid);
+            BuildGridData(TrainDataFile.ArrivalTrainDatas, true, ArrivalsGrid);
         }
 
-        private static Grid BuildGridData(IEnumerable<KeyValuePair<JrhDestType, IReadOnlyList<TrainData>>> data, bool isArrival)
+        private static void BuildGridData(IEnumerable<KeyValuePair<JrhDestType, IReadOnlyList<TrainData>>> data, bool isArrival, Grid grid)
         {
             var i = 0;
-            Grid grid = new Grid();
+            grid.Children.Clear();
 
             foreach (var (dest, trainData) in data)
             {
@@ -54,15 +74,7 @@ namespace TrainInfoWPF.TabUI.StationDataViewer
                     VerticalAlignment = VerticalAlignment.Center,
                 };
 
-                DataTable dataTable = BuildDataTable(trainData, isArrival);
-
-                DataGrid dataGrid = new DataGrid();
-                dataGrid.Columns.Add(new DataGridTextColumn() { Width = 2 });
-                dataGrid.Columns.Add(new DataGridTextColumn() { Width = 1 });
-                dataGrid.Columns.Add(new DataGridTextColumn() { Width = 1 });
-                dataGrid.Columns.Add(new DataGridTextColumn() { Width = 2 });
-                dataGrid.Columns.Add(new DataGridTextColumn() { Width = 2 });
-
+                DataGrid dataGrid = BuildDataGrid(trainData, isArrival);
 
                 grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(40) });
                 grid.RowDefinitions.Add(new RowDefinition());
@@ -75,23 +87,21 @@ namespace TrainInfoWPF.TabUI.StationDataViewer
 
                 i += 2;
             }
-
-            return grid;
         }
 
-        private static DataTable BuildDataTable(IEnumerable<TrainData> trainData, bool isArrival)
+        private static DataGrid BuildDataGrid(IEnumerable<TrainData> trainData, bool isArrival)
         {
-            DataTableBuilder dataTableBuilder = new DataTableBuilder();
+            DataGridBuilder dataGridBuilder = new DataGridBuilder();
 
             var arrString = $"{(isArrival ? "到着" : "出発")}時刻";
 
-            dataTableBuilder.AddColumn("列車名", trainData.Select(td => td.Name.ToString()).ToArray());
-            dataTableBuilder.AddColumn("行先", trainData.Select(td => td.Destination.Name).ToArray());
-            dataTableBuilder.AddColumn(arrString, trainData.Select(td => td.Time.ToString("HH:mm")).ToArray());
-            dataTableBuilder.AddColumn("現在地", trainData.Select(td => td.NowPosition?.ToString() ?? "出発前").ToArray());
-            dataTableBuilder.AddColumn("運行状況", trainData.Select(td => td.Condition.ToString()).ToArray());
+            dataGridBuilder.AddColumn("列車名", trainData.Select(td => td.Name.ToString()).ToArray(), 2);
+            dataGridBuilder.AddColumn("行先", trainData.Select(td => td.Destination.Name).ToArray(), 1);
+            dataGridBuilder.AddColumn(arrString, trainData.Select(td => td.Time.ToString("HH:mm")).ToArray(), 1);
+            dataGridBuilder.AddColumn("現在地", trainData.Select(td => td.NowPosition?.ToString() ?? "出発前").ToArray(), 2);
+            dataGridBuilder.AddColumn("運行状況", trainData.Select(td => td.Condition.ToString()).ToArray(), 2);
 
-            return dataTableBuilder.Build();
+            return dataGridBuilder.Build();
         }
     }
 
