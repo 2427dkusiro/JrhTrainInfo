@@ -25,7 +25,7 @@ namespace TrainInfo.Debuggers
 
             foreach (var station in LineDataReader.GetStations(jrhLine))
             {
-                stringBuilder.Append($"{station.StationID},{station.Name},{station.HiraName},{station.KataName},{station.EnglishName},{station.IsEndStation},{station.StationArea},{jrhLine.GetName()},{station.Position[jrhLine]}\n");
+                stringBuilder.Append($"{station.StationId},{station.Name},{station.HiraName},{station.KataName},{station.EnglishName},{station.IsEndStation},{station.StationArea},{jrhLine.GetName()},{station.Position[jrhLine]}\n");
             }
 
             return stringBuilder.ToString();
@@ -213,12 +213,12 @@ namespace TrainInfo.Debuggers
                 }
             }
 
-            var maxId = stationList.Max(std => std.StationID);
+            var maxId = stationList.Max(std => std.StationId);
             var result = new Station[maxId + 1];
 
             foreach (var std in stationList)
             {
-                result[std.StationID] = std;
+                result[std.StationId] = std;
             }
 
             return result;
@@ -230,7 +230,7 @@ namespace TrainInfo.Debuggers
             foreach (var station in stations)
             {
                 var key = func.Invoke(station);
-                result.Add(key, station.StationID);
+                result.Add(key, station.StationId);
             }
             return result;
         }
@@ -245,7 +245,7 @@ namespace TrainInfo.Debuggers
             }
             else
             {
-                var result = data.Select(std => std.StationID).ToArray();
+                var result = data.Select(std => std.StationId).ToArray();
                 return (jrhLine, result);
             }
         }

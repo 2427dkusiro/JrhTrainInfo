@@ -157,7 +157,7 @@ namespace TrainInfo.TrainPositions
                 .Where(tuple => tuple.trainData.Name.TrainType == TrainData.TrainTypes.Local && tuple.position >= 6);
 
             var tomamuData = GetPosition(dataFile[297].ArrivalTrainDatas[JrhDestType.Sekisyo_Oiwake_Sapporo], jrhLine)
-                .Where(tuple => tuple.trainData.Destination.StationID == 297);
+                .Where(tuple => tuple.trainData.Destination.StationId == 297);
 
             var shintokuData = GetPosition(dataFile[325].ArrivalTrainDatas[JrhDestType.Sekisyo_MinamiChitose_Sapporo], jrhLine);
 
@@ -182,10 +182,10 @@ namespace TrainInfo.TrainPositions
                 TrainDataFile[] array = default;
                 do
                 {
-                    array = await Task.WhenAll(inAreaStaion.Select(n => TrainInfoReader.GetTrainDataAsync(n.StationID)));
+                    array = await Task.WhenAll(inAreaStaion.Select(n => TrainInfoReader.GetTrainDataAsync(n.StationId)));
                     for (var i = 0; i < array.Length; i++)
                     {
-                        result.Add(inAreaStaion[i].StationID, array[i]);
+                        result.Add(inAreaStaion[i].StationId, array[i]);
                     }
 
                     count++;
@@ -210,7 +210,7 @@ namespace TrainInfo.TrainPositions
                 foreach (var station in outAreaStation)
                 {
                     var index = Array.IndexOf(need, station.StationArea);
-                    result.Add(station.StationID, array[index].First(td => td.Station == station));
+                    result.Add(station.StationId, array[index].First(td => td.Station == station));
                 }
             }
 
@@ -228,7 +228,7 @@ namespace TrainInfo.TrainPositions
                 var keyValuePairs = new Dictionary<int, TrainDataFile>();
                 foreach (var n in id)
                 {
-                    keyValuePairs.Add(n, trainDataFiles.First(tdf => tdf.Station.StationID == n));
+                    keyValuePairs.Add(n, trainDataFiles.First(tdf => tdf.Station.StationId == n));
                 }
                 return keyValuePairs;
             });

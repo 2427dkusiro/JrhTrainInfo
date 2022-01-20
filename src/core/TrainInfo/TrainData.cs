@@ -76,9 +76,9 @@ namespace TrainInfo
         {
             if (Name.Name == "いしかりライナー")
             {
-                var destId = Destination.StationID;
-                var targetId = station.StationID;
-                var rapidId = new[] { Name.SubTrainTypeRange.StartPos.StationID, Name.SubTrainTypeRange.EndPos.StationID };
+                var destId = Destination.StationId;
+                var targetId = station.StationId;
+                var rapidId = new[] { Name.SubTrainTypeRange.StartPos.StationId, Name.SubTrainTypeRange.EndPos.StationId };
 
                 if (destId > rapidId.Max())
                 {

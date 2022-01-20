@@ -5,7 +5,9 @@ using Android.OS;
 using Android.Support.V4.Widget;
 using Android.Views;
 using Android.Widget;
+
 using System;
+
 using TrainInfo;
 using TrainInfo.ExtensionMethods;
 using TrainInfo.Stations;
@@ -140,7 +142,7 @@ namespace JrhTrainInfoAndroid
                 {
                     var textView = new TextView(this)
                     {
-                        Text = "↑" + arr.Destination.Name + "行"
+                        Text = $"↑{arr.Name.TrainType.GetName()} {arr.Destination.Name}行",
                     };
                     arrTrainLinearLayout.AddView(textView);
                 }
@@ -149,7 +151,7 @@ namespace JrhTrainInfoAndroid
                 {
                     var textView = new TextView(this)
                     {
-                        Text = "↓" + dep.Destination.Name + "行"
+                        Text = $"↓{dep.Name.TrainType.GetName()} {dep.Destination.Name}行",
                     };
                     depTrainLinearLayout.AddView(textView);
                 }

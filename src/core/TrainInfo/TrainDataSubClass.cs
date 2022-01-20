@@ -72,6 +72,14 @@ namespace TrainInfo
             /// <returns></returns>
             public override string ToString()
             {
+                if (SuspendRange != null)
+                {
+                    return $"{Condition.GetName()}({SuspendRange.ToString()}間)";
+                }
+                if (DelayTimeMin != null)
+                {
+                    return $"{Condition.GetName()}(約{DelayTimeMin}分)";
+                }
                 return Condition.GetName();
             }
         }

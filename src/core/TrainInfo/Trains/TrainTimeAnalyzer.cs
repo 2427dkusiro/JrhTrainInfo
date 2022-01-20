@@ -47,7 +47,7 @@ namespace TrainInfo.Trains
             Dictionary<int, TrainDataFile> dict = new Dictionary<int, TrainDataFile>();
             foreach (var tdf in trainDataFiles)
             {
-                dict.Add(tdf.Station.StationID, tdf);
+                dict.Add(tdf.Station.StationId, tdf);
             }
 
             var lines = Enum.GetValues(typeof(JrhLine)).Cast<JrhLine>();

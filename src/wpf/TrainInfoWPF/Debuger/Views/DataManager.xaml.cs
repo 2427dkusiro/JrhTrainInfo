@@ -119,7 +119,7 @@ namespace TrainInfoWPF.Debuger
             var saveFileWriter = new SaveFileWriter(folder);
             foreach (var std in StationReader.GetAllEnds())
             {
-                await saveFileWriter.SaveTrainData(std.StationID);
+                await saveFileWriter.SaveTrainData(std.StationId);
             }
         }
 
@@ -205,7 +205,7 @@ namespace TrainInfoWPF.Debuger
                 }
                 else
                 {
-                    result = station.StationID;
+                    result = station.StationId;
                     return true;
                 }
             }

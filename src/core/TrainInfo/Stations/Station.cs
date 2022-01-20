@@ -20,7 +20,7 @@ namespace TrainInfo.Stations
         [Obsolete("このコンストラクタは将来的に廃止される可能性があります。")]
         internal Station(int stationID, string name)
         {
-            StationID = stationID;
+            StationId = stationID;
             Name = name;
 
             Position = new Dictionary<JrhLine, int>();
@@ -39,7 +39,7 @@ namespace TrainInfo.Stations
         /// <param name="position"></param>
         public Station(int stationID, string name, string hiraName, string kataName, string englishName, int stationArea, bool isEnd, JrhLine jrhLine, int position)
         {
-            StationID = stationID;
+            StationId = stationID;
             Name = name;
             HiraName = hiraName;
             KataName = kataName;
@@ -68,7 +68,7 @@ namespace TrainInfo.Stations
         [JsonConstructor]
         public Station(int stationID, string name, string hiraName, string kataName, string englishName, bool isEnd, int stationArea, Dictionary<JrhLine, int> position)
         {
-            StationID = stationID;
+            StationId = stationID;
             Name = name;
             HiraName = hiraName;
             KataName = kataName;
@@ -84,7 +84,7 @@ namespace TrainInfo.Stations
         /// 情報取得に必要な駅IDを取得します。
         /// </summary>
         [JsonProperty("ID")]
-        public int StationID { get; private set; }
+        public int StationId { get; private set; }
 
         /// <summary>
         /// 漢字表記の駅名を取得します。
@@ -175,7 +175,7 @@ namespace TrainInfo.Stations
             }
             else
             {
-                if (a.StationID == -1 || a.StationID == -1)
+                if (a.StationId == -1 || a.StationId == -1)
                 {
                     if (a.Name == b.Name)
                     {
@@ -188,7 +188,7 @@ namespace TrainInfo.Stations
                 }
                 else
                 {
-                    return a.StationID == b.StationID;
+                    return a.StationId == b.StationId;
                 }
             }
         }
@@ -214,7 +214,7 @@ namespace TrainInfo.Stations
         {
             if (obj is Station a)
             {
-                return StationID.CompareTo(a.StationID);
+                return StationId.CompareTo(a.StationId);
             }
             else
             {

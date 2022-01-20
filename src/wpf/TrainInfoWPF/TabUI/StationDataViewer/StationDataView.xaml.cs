@@ -32,13 +32,12 @@ namespace TrainInfoWPF.TabUI.StationDataViewer
             StationDataSelectDialog stationDataSelectDialog = new StationDataSelectDialog();
             stationDataSelectDialog.ShowDialog();
 
-            var station = stationDataSelectDialog.SelectedStation;
-            if (station is null)
+            if (stationDataSelectDialog.SelectedSource is null)
             {
                 return null;
             }
 
-            var trainData = await TrainInfoReader.GetTrainDataAsync(station.StationID);
+            var trainData = stationDataSelectDialog.SelectedSource;
             StationDataView stationDataView = new StationDataView(trainData);
             return stationDataView;
         }

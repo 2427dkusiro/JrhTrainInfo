@@ -72,7 +72,7 @@ namespace TrainInfo.Debuggers
                 return true;
             }
             var res = StationReader.GetStationByName(str);
-            id = res?.StationID ?? default;
+            id = res?.StationId ?? default;
             return res != null;
         }
     }

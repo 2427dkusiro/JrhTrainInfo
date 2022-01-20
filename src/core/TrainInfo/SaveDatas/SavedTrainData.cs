@@ -144,13 +144,13 @@ namespace TrainInfo.SaveDatas
             {
                 return null;
             }
-            else if (station.StationID == -1)
+            else if (station.StationId == -1)
             {
                 return station.Name;
             }
             else
             {
-                return station.StationID.ToString();
+                return station.StationId.ToString();
             }
         }
 
@@ -218,7 +218,7 @@ namespace TrainInfo.SaveDatas
                 result.ArrivalTrainDatas.Add(kvp.Key, kvp.Value.Select(td => AnalyzedTrainData.FromTrainData(td)).ToArray());
             }
 
-            result.Station = trainDataFile.Station.StationID;
+            result.Station = trainDataFile.Station.StationId;
             result.GetedDateTime = trainDataFile.GetedDateTime;
 
             return result;

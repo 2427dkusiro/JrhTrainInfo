@@ -78,7 +78,7 @@ namespace JrhTrainInfoAndroid
             {
                 searchView.QueryTextSubmit += (sender, args) =>
                 {
-                    Toast.MakeText(this, "You searched: " + args.Query, ToastLength.Short).Show();
+                    // Toast.MakeText(this, "You searched: " + args.Query, ToastLength.Short).Show();
                 };
             }
             return base.OnCreateOptionsMenu(menu);

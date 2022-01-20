@@ -160,7 +160,7 @@ namespace TrainInfoWPF.Debuger.Views
 
         private async Task GetAllData(CancellationToken cancellationToken)
         {
-            var query = StationReader.GetAllStations().Where(std => std.StationArea == 0).Select(std => std.StationID);
+            var query = StationReader.GetAllStations().Where(std => std.StationArea == 0).Select(std => std.StationId);
             var savePath = path + "\\すべての駅";
 
             await DataGeter(cancellationToken, query, savePath);

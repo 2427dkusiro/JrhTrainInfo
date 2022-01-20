@@ -62,7 +62,7 @@ namespace TrainInfo
             return await Task.Run(() =>
             {
                 var rawTrainDataFiles = JsonDeserializer.DeserializeSpecialTrainInfo(data);
-                return TrainFilePaeser.ParseRawTrainDataFile(rawTrainDataFiles.First(rtdf => rtdf.StationId == station.StationID));
+                return TrainFilePaeser.ParseRawTrainDataFile(rawTrainDataFiles.First(rtdf => rtdf.StationId == station.StationId));
             });
         }
 

@@ -5,9 +5,11 @@ using Android.OS;
 using Android.Support.V4.Widget;
 using Android.Views;
 using Android.Widget;
+
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+
 using TrainInfo;
 using TrainInfo.ExtensionMethods;
 using TrainInfo.Stations;
@@ -41,7 +43,7 @@ namespace JrhTrainInfoAndroid
 
 
         private const int textSize_Normal = 16;
-        private const int showCountMax = 4;
+        private const int showCountMax = 6;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -81,7 +83,7 @@ namespace JrhTrainInfoAndroid
         private void InitializeLayoutParams()
         {
             trainDataLayoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-           
+
             trainTypeIconlayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent)
             {
                 Height = 50,
@@ -116,7 +118,7 @@ namespace JrhTrainInfoAndroid
             TrainDataFile data = null;
             try
             {
-                data = await TrainInfoReader.GetTrainDataAsync(station.StationID);
+                data = await TrainInfoReader.GetTrainDataAsync(station.StationId);
                 trainDataFile = data;
             }
             catch (Exception ex)
@@ -176,7 +178,7 @@ namespace JrhTrainInfoAndroid
                 for (var j = 0; j < showCount; j++)
                 {
                     var trainGaiyoLayout = RenderTrainDataLayout(depData[j]);
-                    trainGaiyoLayout.SetPadding(20, 0, 20, 0);
+                    trainGaiyoLayout.SetPadding(20, 5, 20, 5);
                     destTypeGroupedTrainLinearLayout.AddView(trainGaiyoLayout, trainDataLayoutParams);
                 }
 
@@ -193,6 +195,11 @@ namespace JrhTrainInfoAndroid
 
         private LinearLayout RenderTrainDataLayout(TrainData train)
         {
+            var parentLayout = new LinearLayout(this)
+            {
+                Orientation = Orientation.Vertical,
+            };
+
             var trainGaiyoLayout = new LinearLayout(this)
             {
                 Orientation = Orientation.Horizontal
@@ -227,7 +234,26 @@ namespace JrhTrainInfoAndroid
                 TextAlignment = TextAlignment.Center,
             };
             trainGaiyoLayout.AddView(trainTimeTextView, trainTimeLayoutParams);
-            return trainGaiyoLayout;
+
+            // 二行目
+            var status = new TextView(this)
+            {
+                TextSize = textSize_Normal,
+            };
+
+            if (train.NowPosition is null)
+            {
+                status.Text = train.Condition.ToString();
+            }
+            else
+            {
+                status.Text = $"{train.Condition.ToString()} | {train.NowPosition.ToString()}走行中";
+            }
+
+            var param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MatchParent, LinearLayout.LayoutParams.WrapContent);
+            parentLayout.AddView(trainGaiyoLayout, param);
+            parentLayout.AddView(status, param);
+            return parentLayout;
         }
 
         private int GetTrainTypeIcon(TrainData.TrainTypes trainTypes)

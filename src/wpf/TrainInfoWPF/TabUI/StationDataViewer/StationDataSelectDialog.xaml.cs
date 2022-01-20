@@ -32,9 +32,9 @@ namespace TrainInfoWPF.TabUI.StationDataViewer
             InitializeComponent();
         }
 
-        public Station SelectedStation { get; set; }
+        public TrainDataFile SelectedSource { get; set; }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        private async void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             var station = StationReader.GetStationByName(StationSerchTextBox.Text);
             if (station is null)
@@ -43,12 +43,12 @@ namespace TrainInfoWPF.TabUI.StationDataViewer
             }
             else
             {
-                SelectedStation = station;
+                SelectedSource = await TrainInfoReader.GetTrainDataAsync(station.StationId);
                 this.Close();
             }
         }
 
-        private void OpenLocalFileButton_Click(object sender, RoutedEventArgs e)
+        private async void OpenLocalFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Jsonファイル(*.json)|*.json";
@@ -59,23 +59,31 @@ namespace TrainInfoWPF.TabUI.StationDataViewer
             var trainDataFile = TryPaeseTrainDataFile(file);
             if (trainDataFile != null)
             {
-                this.
+                this.SelectedSource = trainDataFile;
+                this.Close();
             }
-
+            else
+            {
+                var data = await SaveFileReader.ReadJsonDataAsync(file);
+                this.SelectedSource = data;
+                this.Close();
+            }
         }
 
         private static TrainDataFile TryPaeseTrainDataFile(string filePath)
         {
             try
             {
+                string str = "";
                 using (StreamReader streamReader = new StreamReader(filePath, Encoding.UTF8))
                 {
-                    var str = streamReader.ReadToEnd();
-                    var result = JsonConvert.DeserializeObject<AnalyzedTrainFile>(str);
-                    return result.ToTrainDataFile();
+                    str = streamReader.ReadToEnd();
                 }
+                var result = JsonConvert.DeserializeObject<AnalyzedTrainFile>(str);
+                var res = result.ToTrainDataFile();
+                return res;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -94,6 +102,7 @@ namespace TrainInfoWPF.TabUI.StationDataViewer
         }
     }
 
+    /*
     /// <summary>
     /// 列車データの取得元を表現する抽象クラスです。
     /// </summary>
@@ -107,6 +116,8 @@ namespace TrainInfoWPF.TabUI.StationDataViewer
     /// </summary>
     public class StationDataTrainDataSource : TrainDataSourse
     {
+        public StationDataTrainDataSource(Station station) => Station = station ?? throw new ArgumentNullException(nameof(station));
+
         public Station Station { get; }
 
         public override Task<TrainDataFile> GetTrainDataFile()
@@ -120,7 +131,32 @@ namespace TrainInfoWPF.TabUI.StationDataViewer
     /// </summary>
     public class LocalFileTrainDataSource : TrainDataSourse
     {
+        public LocalFileTrainDataSource(string filePath) => FilePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
 
+        public string FilePath { get; }
+
+        public override Task<TrainDataFile> GetTrainDataFile() => SaveFileReader.ReadJsonDataAsync(FilePath);
     }
 
+    public class LocalAreaFileTrainDataSource : TrainDataSourse
+    {
+        public LocalAreaFileTrainDataSource(string filePath) => FilePath = filePath ?? throw new ArgumentNullException(nameof(filePath));
+
+        public string FilePath { get; }
+
+        public override Task<TrainDataFile> GetTrainDataFile() => Task.Run(async () => (await SaveFileReader.ReadSpecialJsonDataAsync(FilePath)).First());
+    }
+
+    public class TrainDataFileObjectDataSource : TrainDataSourse
+    {
+        public TrainDataFileObjectDataSource(TrainDataFile trainDataFile) => TrainDataFile = trainDataFile ?? throw new ArgumentNullException(nameof(trainDataFile));
+
+        public TrainDataFile TrainDataFile { get; }
+
+        public override Task<TrainDataFile> GetTrainDataFile()
+        {
+            return Task.Run(() => TrainDataFile);
+        }
+    }
+    */
 }
