@@ -84,9 +84,11 @@ namespace TrainInfo.Stations
                     return JrhDestType.chitose_Tomakomai;
                 case "室蘭・函館方面":
                     return JrhDestType.Chitose_Muroran;
-                case "石狩当別方面":
+                case "当別方面":
+                case "石狩当別方面": // Obsoluted!
                     return JrhDestType.Sassyo_IshikariTobetsu;
-                case "浦臼・新十津川方面":
+                case "北海道医療大学":
+                case "浦臼・新十津川方面": // Obsoluted!
                     return JrhDestType.Sassyo_Urausu;
                 case "追分・苫小牧方面":
                 case "追分・岩見沢方面":

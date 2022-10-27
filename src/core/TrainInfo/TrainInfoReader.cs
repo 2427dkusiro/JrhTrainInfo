@@ -35,6 +35,7 @@ namespace TrainInfo
             }
 
             var data = await TrainDataGeter.GetTrainDataJsonAsync(id);
+
             return await Task.Run(() =>
             {
                 var rawTrainDataFile = JsonDeserializer.DeserializeTrainInfo(data);

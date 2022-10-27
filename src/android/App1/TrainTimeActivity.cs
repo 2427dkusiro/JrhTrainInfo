@@ -123,11 +123,11 @@ namespace JrhTrainInfoAndroid
             }
             catch (Exception ex)
             {
-                EventHandler<DialogClickEventArgs> eventHandler = (object sender, DialogClickEventArgs e) =>
+                EventHandler<DialogClickEventArgs> eventHandler = async (object sender, DialogClickEventArgs e) =>
                 {
                     if (e.Which == -1)
                     {
-                        GetStationData();
+                        await GetStationData();
                     }
 
                     if (e.Which == -2)
@@ -136,13 +136,18 @@ namespace JrhTrainInfoAndroid
                     }
                 };
 
+#if DEBUG
+                throw;
+#else
+
                 new AlertDialog.Builder(this)
                  .SetTitle("ネットワークエラー")
                  .SetMessage($"データを取得できませんでした。端末のネットワーク接続状況をご確認ください。{System.Environment.NewLine}エラーの詳細:{ex.Message}")
                  .SetPositiveButton("再試行", eventHandler)
                  .SetNegativeButton("戻る", eventHandler)
                  .Show();
-                return;
+                 return;
+#endif
             }
         }
 
@@ -153,6 +158,10 @@ namespace JrhTrainInfoAndroid
         private async Task ShowData()
         {
             await GetStationData();
+            if (trainDataFile is null)
+            {
+                return;
+            }
             GettedTimeTextView.Text = $"{trainDataFile.GetedDateTime.ToString()} 現在の情報";
             RenderData();
         }
